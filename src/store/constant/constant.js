@@ -1,0 +1,8 @@
+const ActionTypes = {
+    ISLOADER: 'ISLOADER',
+    ISERROR: 'ISERROR',
+    CURRENTUSER: 'CURRENTUSER',
+    FREEPOTATOES: 'FREEPOTATOES',
+    TOPICLIST:'TOPICLIST',
+}
+export default ActionTypes;
