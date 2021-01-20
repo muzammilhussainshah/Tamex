@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { View, Dimensions, TouchableOpacity, } from 'react-native';
+import React from 'react';
 import AppHeader from '../components/header/AppHeader';
 import AppFooter from '../components/Footer/Footer';
-const screenHeight = Dimensions.get('window').height - 24;
+import {
+    View,
+} from 'react-native';
 
 export default AppContainer = ({ firstImg, secondImg, children, heading }) => {
     return (

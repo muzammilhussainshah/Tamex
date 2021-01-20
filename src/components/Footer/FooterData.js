@@ -2,8 +2,8 @@ import Colors from '../../common/Colors';
 export default data = [
     {
         id: '0',
-        title: 'Chat to a Potato',
-        iconName: "home",
+        title: 'Profile',
+        iconName: "person",
         color: Colors.secondary,
         route: "Home",
     },
@@ -11,7 +11,7 @@ export default data = [
         id: '1',
         title: 'Favourites',
         iconName: "inbox",
-        color: Colors.shade,
+        color: Colors.shade ,
         route: "Home",
     },
     {
@@ -23,10 +23,9 @@ export default data = [
     },
     {
         id: '3',
-        title: 'Profile',
-        iconName: "person",
-        color: Colors.shade,
-        // color: Colors.secondary,
+        title: 'Dashbord',
+        iconName: "home",
+        color: Colors.shade ,
         route: "Home",
     },
 ]

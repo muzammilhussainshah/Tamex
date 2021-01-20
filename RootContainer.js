@@ -8,15 +8,15 @@ const RootContainer = () => {
 
   useEffect(() => {
     console.disableYellowBox = true
-    setTimeout(() => {
-      setSplash(false)
-    }, 0);
+    // setTimeout(() => {
+    //   setSplash(false)
+    // }, 0);
   }, [])
 
   return (
-    Splash ?
-      <SplashScreen /> 
-      :
+    // Splash ?
+    //   <SplashScreen /> 
+      // :
       <StackNavigation />
   )
 };

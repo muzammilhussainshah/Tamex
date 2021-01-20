@@ -1,10 +1,12 @@
 import React from 'react'
-import { View, FlatList, } from 'react-native'
 import FooterTab from '../Footer/FooterTab';
 import FooterData from '../Footer/FooterData';
 import styles from './style'
 import Colors from '../../common/Colors';
-import { Actions } from 'react-native-router-flux';
+import {
+    View,
+    FlatList,
+} from 'react-native'
 class AppFooter extends React.Component {
     constructor(props) {
         super(props)
@@ -12,12 +14,12 @@ class AppFooter extends React.Component {
             data: FooterData
         }
     };
-    componentWillMount(){
+    componentWillMount() {
         const { heading } = this.props;
         const { data } = this.state;
         var dataClone = data;
         dataClone.map((v, i) => {
-            dataClone[i].color = Colors.fontClr
+            dataClone[i].color = Colors.shade
         })
         let index = dataClone.findIndex(x => x.title === heading);
         data[index].color = Colors.secondary
