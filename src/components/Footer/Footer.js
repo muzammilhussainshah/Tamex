@@ -3,6 +3,7 @@ import FooterTab from '../Footer/FooterTab';
 import FooterData from '../Footer/FooterData';
 import styles from './style'
 import Colors from '../../common/Colors';
+import { Actions } from 'react-native-router-flux';
 import {
     View,
     FlatList,
@@ -39,7 +40,7 @@ class AppFooter extends React.Component {
                             iconName={item.iconName}
                             color={item.color}
                             func={(index) => {
-                                // Actions[item.route]()
+                                Actions[item.route]()
                             }}
                             keyExtractor={item => item.id}
                         />

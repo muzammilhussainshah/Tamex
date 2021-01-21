@@ -2,10 +2,10 @@ import Colors from '../../common/Colors';
 export default data = [
     {
         id: '0',
-        title: 'Profile',
+        title: 'Completed',
         iconName: "person",
         color: Colors.secondary,
-        route: "Home",
+        route: "Completed",
     },
     {
         id: '1',
