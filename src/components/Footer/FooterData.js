@@ -9,10 +9,10 @@ export default data = [
     },
     {
         id: '1',
-        title: 'Favourites',
+        title: 'Task',
         iconName: "inbox",
         color: Colors.shade ,
-        route: "Home",
+        route: "Task",
     },
     {
         id: '2',

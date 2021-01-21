@@ -90,7 +90,7 @@ const Completed = () => {
               <FlatList
                 data={DATA}
                 renderItem={({ item, index, separators }) => (
-                  <Card data={item} failed={true} />
+                  <Card data={item} buttons={true} />
                 )}
               />
             </ScrollView>

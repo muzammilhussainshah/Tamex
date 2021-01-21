@@ -8,10 +8,12 @@ import FontAwesome from "react-native-vector-icons/FontAwesome"
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import Fontisto from "react-native-vector-icons/Fontisto"
 import Ionicons from "react-native-vector-icons/Ionicons"
+import Entypo from "react-native-vector-icons/Entypo"
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Card = ({ _func, failed, data }) => {
+const Card = ({ _func, buttons, data, dropdown }) => {
     return (
-        <View onPress={_func} style={[styles.card, { height: failed ? 470 : 420, }]}>
+        <View onPress={_func} style={[styles.card, { height: buttons ? 470 : 420, }]}>
             <View style={styles.card_Child1_Headeing}>
                 <View style={styles.card_Child1_Headeing_child1}>
                     <FastImage
@@ -33,6 +35,12 @@ const Card = ({ _func, failed, data }) => {
                         <Text style={{ marginLeft: 5, fontWeight: "bold", fontSize: 16 }}>{data.deliveryNumber}</Text>
                     </View>
                 </View>
+                {
+                    dropdown &&
+                    <TouchableOpacity style={{ flex: 0.5, justifyContent: "center", alignItems: "center", }}>
+                        <Entypo name="dots-three-vertical" style={{ fontSize: 22, color: Colors.grey }} />
+                    </TouchableOpacity>
+                }
             </View>
             <View style={styles.listing}>
                 <View style={styles.listing_Child1}>
@@ -87,7 +95,7 @@ const Card = ({ _func, failed, data }) => {
                 </View>
             </View>
             <View style={[styles.listing, {
-                borderBottomWidth: failed ? 0.5 : 0,
+                borderBottomWidth: buttons ? 0.5 : 0,
                 borderBottomColor: Colors.grey
             }]}>
                 <View style={styles.listing_Child1}>
@@ -115,7 +123,7 @@ const Card = ({ _func, failed, data }) => {
                 </View>
             </View>
             {
-                failed &&
+                buttons &&
                 <View style={styles.card_Footer}>
                     <Button withIcon={true} backgroundColor={Colors.white} borderColor={Colors.red} name={"Faild"} textColor={Colors.red} marginTop={12} width={160} />
                     <Button withIcon={true} backgroundColor={Colors.primary} borderColor={Colors.primary} name={"Delivered"} textColor={Colors.white} marginTop={12} width={160} />
