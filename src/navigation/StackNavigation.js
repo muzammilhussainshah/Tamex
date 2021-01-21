@@ -25,7 +25,7 @@ export default Route = () => {
       tintColor="white">
       <Scene>
         <Scene key='Home' component={Home} hideNavBar={true} />
-        <Scene key='Completed' component={Completed} hideNavBar={true} />
+        <Scene key='Completed' component={Completed} hideNavBar={true} initial/>
       </Scene>
     </Router>
   );

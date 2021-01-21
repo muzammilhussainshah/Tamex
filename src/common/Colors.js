@@ -5,5 +5,6 @@ export default {
     white: "#ffffff",
     bgColor: "#f8f4f6",
     blk: "black",
-    grey: "grey",
+    grey: "#B6B6B6",
+    red: "red",
 }
