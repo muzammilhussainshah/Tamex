@@ -9,7 +9,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import Fontisto from "react-native-vector-icons/Fontisto"
 import Ionicons from "react-native-vector-icons/Ionicons"
 
-const Card = ({ _func, failed }) => {
+const Card = ({ _func, failed, data }) => {
     return (
         <View onPress={_func} style={[styles.card, { height: failed ? 470 : 420, }]}>
             <View style={styles.card_Child1_Headeing}>
@@ -30,7 +30,7 @@ const Card = ({ _func, failed }) => {
                         <Text style={{ marginLeft: 10 }}>Delivery</Text>
                     </View>
                     <View style={{ flex: 1, marginLeft: 7, justifyContent: "center", }}>
-                        <Text style={{ marginLeft: 5, fontWeight: "bold", fontSize: 16 }}>10294838759356</Text>
+                        <Text style={{ marginLeft: 5, fontWeight: "bold", fontSize: 16 }}>{data.deliveryNumber}</Text>
                     </View>
                 </View>
             </View>
@@ -43,7 +43,7 @@ const Card = ({ _func, failed }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Recipent Name</Text>
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Text style={{ marginLeft: 7 }}>Ali Mohamed Hasan</Text>
+                        <Text style={{ marginLeft: 7 }}>{data.recipeint_Name}</Text>
                     </View>
                 </View>
             </View>
@@ -56,7 +56,7 @@ const Card = ({ _func, failed }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Recipent Mobile</Text>
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Text style={{ marginLeft: 7 }}>+971 5205521</Text>
+                        <Text style={{ marginLeft: 7 }}>{data.recipeint_Mobile}</Text>
                     </View>
                 </View>
             </View>
@@ -69,7 +69,7 @@ const Card = ({ _func, failed }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>From</Text>
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Text style={{ marginLeft: 7 }}>www.amazon.com</Text>
+                        <Text style={{ marginLeft: 7 }}>{data.form}</Text>
                     </View>
                 </View>
             </View>
@@ -82,7 +82,7 @@ const Card = ({ _func, failed }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Destination</Text>
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Text style={{ marginLeft: 7 }}>Riyadh, Rawdia, Hassan Street Near Work Station</Text>
+                        <Text style={{ marginLeft: 7 }}>{data.destination}</Text>
                     </View>
                 </View>
             </View>
@@ -98,7 +98,7 @@ const Card = ({ _func, failed }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>COD</Text>
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Text style={{ marginLeft: 7 }}>120.98</Text>
+                        <Text style={{ marginLeft: 7 }}>{data.cordination}</Text>
                     </View>
                 </View>
 
@@ -110,7 +110,7 @@ const Card = ({ _func, failed }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Number of PC's</Text>
                     </View>
                     <View style={{ flex: 1 }}>
-                        <Text style={{ marginLeft: 7 }}>05</Text>
+                        <Text style={{ marginLeft: 7 }}>{data.number_of_pcs}</Text>
                     </View>
                 </View>
             </View>

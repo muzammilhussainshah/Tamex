@@ -4,9 +4,10 @@ import Colors from "../../common/Colors"
 import {
   Text,
   View,
-  ScrollView
+  ScrollView,
+  FlatList
 } from 'react-native';
-import { Tabs, Tab, TabHeading } from 'native-base';
+import { Tabs, Tab, TabHeading, } from 'native-base';
 import Card from "../../components/Cards"
 
 const Completed = () => {
@@ -19,7 +20,7 @@ const Completed = () => {
       setActiveColor("Failed")
     }
   }
-  let data = [
+  let DATA = [
     {
       recipeint_Name: "Ali Mohamed Hasan",
       recipeint_Mobile: "+971 5205521",
@@ -30,7 +31,7 @@ const Completed = () => {
       deliveryNumber: "10294838759356"
     },
     {
-      recipeint_Name: "Ali Mohamed Hasan",
+      recipeint_Name: "Abdullah Shah",
       recipeint_Mobile: "+971 5205521",
       form: "www.amazon.com",
       destination: "Riyadh, Rawdia, Hassan Street Near Work Station",
@@ -39,7 +40,7 @@ const Completed = () => {
       deliveryNumber: "10294838759356"
     },
     {
-      recipeint_Name: "Ali Mohamed Hasan",
+      recipeint_Name: "Saghir Ahmed",
       recipeint_Mobile: "+971 5205521",
       form: "www.amazon.com",
       destination: "Riyadh, Rawdia, Hassan Street Near Work Station",
@@ -68,7 +69,12 @@ const Completed = () => {
               </TabHeading>}
           >
             <ScrollView style={{ backgroundColor: Colors.bgColor, }} contentContainerStyle={{ paddingBottom: 100 }}>
-              <Card />
+              <FlatList
+                data={DATA}
+                renderItem={({ item, index, separators }) => (
+                  <Card data={item} />
+                )}
+              />
             </ScrollView>
           </Tab>
           <Tab
@@ -81,11 +87,15 @@ const Completed = () => {
             }
           >
             <ScrollView style={{ backgroundColor: Colors.bgColor, }} contentContainerStyle={{ paddingBottom: 100 }}>
-              <Card failed={true} />
+              <FlatList
+                data={DATA}
+                renderItem={({ item, index, separators }) => (
+                  <Card data={item} failed={true} />
+                )}
+              />
             </ScrollView>
           </Tab>
         </Tabs>
-
       </View>
     </AppContainer >
   )
