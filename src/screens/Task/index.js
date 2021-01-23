@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList
 } from 'react-native';
+import ShipmentIdQrCode from "../../components/shipmentIdQrCode"
 import Card from "../../components/Cards"
 
 const Task = () => {
@@ -45,6 +46,7 @@ const Task = () => {
       drawerProps={true}
       heading={"Task"} >
       <View style={{ flex: 8, backgroundColor: Colors.bgColor }}>
+        <ShipmentIdQrCode />
         <ScrollView style={{ backgroundColor: Colors.bgColor, }} contentContainerStyle={{ paddingBottom: 100 }}>
           <FlatList
             data={DATA}
