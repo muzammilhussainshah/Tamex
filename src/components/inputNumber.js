@@ -9,10 +9,11 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-const PhoneNumber = ({ CheckMark, maxLength, passwordShow, placeHolder, _func }) => {
+import { Col } from 'native-base';
+const PhoneNumber = ({ CheckMark,placeholderTextColor, maxLength, passwordShow, placeHolder, _func }) => {
   return (
     <View style={styles.mainView}>
-      <View style={styles.country}>
+      <View style={ styles.country  }>
         <TouchableOpacity style={{ flexDirection: "row" }}>
           < FastImage
             style={{ height: 20, width: 20, }}
@@ -24,12 +25,13 @@ const PhoneNumber = ({ CheckMark, maxLength, passwordShow, placeHolder, _func })
             </Text>
         </TouchableOpacity>
       </View>
-      <View style={{ flex: CheckMark ? 6.5 : 8 }}>
+      <View style={{ flex: CheckMark ? 6.5 : 8  }}>
         <TextInput
           style={{ fontSize: 17, paddingHorizontal: 15, }}
           maxLength={maxLength}
           onChangeText={(text) => _func(text)}
           keyboardType="numeric"
+          placeholderTextColor={placeholderTextColor}
           placeholder={placeHolder}
           secureTextEntry={passwordShow == false ? true : false}
         />
@@ -53,11 +55,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 15,
     flexDirection: "row",
+    alignItems:"center",
+    // justifyContent:"center",
     width: "100%",
     backgroundColor: Colors.white
   },
   country: {
     flex: 2,
+    height:30,
     justifyContent: "center",
     alignItems: "center",
     borderRightWidth: 1,

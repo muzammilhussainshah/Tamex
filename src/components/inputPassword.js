@@ -10,7 +10,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-const PhoneNumber = ({ eyeBtn, _func }) => {
+const PhoneNumber = ({ eyeBtn, placeholderTextColor, _func }) => {
     const [passwordShow, setPasswordShow] = useState(false);
     return (
         <View style={styles.passwordDiv}>
@@ -19,6 +19,7 @@ const PhoneNumber = ({ eyeBtn, _func }) => {
                     <InputForms
                         placeHolder="Password"
                         passwordShow={passwordShow}
+                        placeholderTextColor={placeholderTextColor}
                         _func={_func}
                     />
                 </View>
