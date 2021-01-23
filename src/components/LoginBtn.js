@@ -1,17 +1,19 @@
 import React from "react";
-import Entypo from "react-native-vector-icons/Entypo"
+import Entypo from "react-native-vector-icons/Entypo";
 import {
     TouchableOpacity,
     StyleSheet,
     Text
 } from 'react-native';
-const LoginBtn = ({ backgroundColor, marginTop, width, _func, name, textColor, borderColor }) => {
+const LoginBtn = ({ backgroundColor, marginTop, width, borderRadius, _func, name, textColor, borderColor }) => {
     return (
         <TouchableOpacity onPress={_func}
             activeOpacity={0.8}
             style={
                 [styles.buttonDiv,
                 {
+                    borderRadius: borderRadius ? borderRadius : 3,
+
                     backgroundColor: backgroundColor,
                     marginTop: marginTop,
                     width: width,
@@ -52,7 +54,6 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 3,
         height: 70,
         borderRadius: 10
     }
