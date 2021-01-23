@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, } from 'react-native';
+import { View, StyleSheet, Text, Pressable} from 'react-native';
 import Colors from '../common/Colors';
 import FastImage from 'react-native-fast-image'
 import Button from "../components/button"
@@ -10,6 +10,7 @@ import Fontisto from "react-native-vector-icons/Fontisto"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import Entypo from "react-native-vector-icons/Entypo"
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Actions } from 'react-native-router-flux';
 
 const Card = ({ _func, buttons, data, dropdown }) => {
     return (
@@ -37,9 +38,11 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                 </View>
                 {
                     dropdown &&
-                    <TouchableOpacity style={{ flex: 0.5, justifyContent: "center", alignItems: "center", }}>
+                    <Pressable
+                        onPress={() => { Actions.Notes() }}
+                        style={{ flex: 0.5, justifyContent: "center", alignItems: "center", }}>
                         <Entypo name="dots-three-vertical" style={{ fontSize: 22, color: Colors.grey }} />
-                    </TouchableOpacity>
+                    </Pressable>
                 }
             </View>
             <View style={styles.listing}>
