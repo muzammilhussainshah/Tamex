@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Router, Scene, } from 'react-native-router-flux'
 import Completed from '../screens/Completed/index';
 import Task from '../screens/Task/index';
+import Load from '../screens/Load/index';
 import Home from '../screens/Home/index';
 export default Route = () => {
   const [initial, setInitial] = useState("WalkThrough");
@@ -25,9 +26,10 @@ export default Route = () => {
       titleStyle={{ color: "white" }}
       tintColor="white">
       <Scene>
-        <Scene key='Completed' component={Completed} hideNavBar={true}  />
-        <Scene key='Task' component={Task} hideNavBar={true} initial />
+        <Scene key='Completed' component={Completed} hideNavBar={true} initial />
+        <Scene key='Task' component={Task} hideNavBar={true} />
         <Scene key='Home' component={Home} hideNavBar={true} />
+        <Scene key='Load' component={Load} hideNavBar={true} />
       </Scene>
     </Router>
   );
