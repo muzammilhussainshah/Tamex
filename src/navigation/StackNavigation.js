@@ -29,10 +29,10 @@ export default Route = () => {
       titleStyle={{ color: "white" }}
       tintColor="white">
       <Scene>
-        <Scene key='Completed' component={Completed} hideNavBar={true} />
-        <Scene key='Task' component={Task} hideNavBar={true} initial />
-        <Scene key='Home' component={Home} hideNavBar={true} />
+        <Scene key='Home' component={Home} hideNavBar={true} initial />
         <Scene key='Load' component={Load} hideNavBar={true} />
+        <Scene key='Task' component={Task} hideNavBar={true} />
+        <Scene key='Completed' component={Completed} hideNavBar={true} />
         <Scene key='Notes' component={Notes} hideNavBar={true} />
         <Scene key='Faild' component={Faild} hideNavBar={true} />
         <Scene key='Delivered' component={Delivered} hideNavBar={true} />
