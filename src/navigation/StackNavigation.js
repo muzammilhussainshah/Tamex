@@ -7,6 +7,7 @@ import Load from '../screens/Load/index';
 import Home from '../screens/Home/index';
 import Notes from '../screens/Notes/index';
 import Faild from '../screens/Faild/index';
+import Delivered from '../screens/Delivered/index';
 export default Route = () => {
   const [initial, setInitial] = useState("WalkThrough");
 
@@ -34,6 +35,7 @@ export default Route = () => {
         <Scene key='Load' component={Load} hideNavBar={true} />
         <Scene key='Notes' component={Notes} hideNavBar={true} />
         <Scene key='Faild' component={Faild} hideNavBar={true} />
+        <Scene key='Delivered' component={Delivered} hideNavBar={true} />
       </Scene>
     </Router>
   );

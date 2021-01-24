@@ -131,7 +131,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                 buttons &&
                 <View style={styles.card_Footer}>
                     <Button withIcon={true} _func={() => routChange("Faild")} backgroundColor={Colors.white} borderColor={Colors.red} name={"Faild"} textColor={Colors.red} marginTop={12} width={160} />
-                    <Button withIcon={true} backgroundColor={Colors.primary} borderColor={Colors.primary} name={"Delivered"} textColor={Colors.white} marginTop={12} width={160} />
+                    <Button withIcon={true} _func={() => routChange("Delivered")} backgroundColor={Colors.primary} borderColor={Colors.primary} name={"Delivered"} textColor={Colors.white} marginTop={12} width={160} />
                 </View>
             }
         </View>
