@@ -3,7 +3,7 @@ import { View, StyleSheet, } from 'react-native';
 import Colors from '../common/Colors';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-const Dropdown = ({ }) => {
+const Dropdown = ({ heading }) => {
     const [country, setCountry] = useState("");
     return (
         <View style={styles.dd}>
@@ -13,7 +13,7 @@ const Dropdown = ({ }) => {
                     { label: 'France', value: 'france' },
                 ]}
                 defaultValue={country}
-                placeholder={'Select Note Cotogray'}
+                placeholder={heading}
                 placeholderStyle={{ color: Colors.grey, fontWeight: "bold", fontSize: 16 }}
                 containerStyle={{ height: 50, width: "100%", }}
                 style={{ borderColor: "white", }}

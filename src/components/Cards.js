@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, Pressable} from 'react-native';
+import { View, StyleSheet, Text, Pressable } from 'react-native';
 import Colors from '../common/Colors';
 import FastImage from 'react-native-fast-image'
 import Button from "../components/button"
@@ -9,10 +9,12 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5"
 import Fontisto from "react-native-vector-icons/Fontisto"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import Entypo from "react-native-vector-icons/Entypo"
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { Actions } from 'react-native-router-flux';
 
 const Card = ({ _func, buttons, data, dropdown }) => {
+    const routChange = (rout) => {
+        Actions[rout]()
+    }
     return (
         <View onPress={_func} style={[styles.card, { height: buttons ? 470 : 420, }]}>
             <View style={styles.card_Child1_Headeing}>
@@ -128,7 +130,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
             {
                 buttons &&
                 <View style={styles.card_Footer}>
-                    <Button withIcon={true} backgroundColor={Colors.white} borderColor={Colors.red} name={"Faild"} textColor={Colors.red} marginTop={12} width={160} />
+                    <Button withIcon={true} _func={() => routChange("Faild")} backgroundColor={Colors.white} borderColor={Colors.red} name={"Faild"} textColor={Colors.red} marginTop={12} width={160} />
                     <Button withIcon={true} backgroundColor={Colors.primary} borderColor={Colors.primary} name={"Delivered"} textColor={Colors.white} marginTop={12} width={160} />
                 </View>
             }
