@@ -12,8 +12,7 @@ const LoginBtn = ({ backgroundColor, marginTop, width, borderRadius, _func, name
             style={
                 [styles.buttonDiv,
                 {
-                    borderRadius: borderRadius ? borderRadius : 3,
-
+                    borderRadius: borderRadius ? borderRadius : 10,
                     backgroundColor: backgroundColor,
                     marginTop: marginTop,
                     width: width,

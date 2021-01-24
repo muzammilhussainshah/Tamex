@@ -44,7 +44,7 @@ export default WalkThrough = () => {
                     resizeMode={"contain"}
                 />
             </View>
-            <View style={{ flex: 7.5 }}>
+            <View style={{ flex: 8.5 }}>
                 <ImageSlider
                     style={{ backgroundColor: 'none', }}
                     loop
@@ -70,7 +70,7 @@ export default WalkThrough = () => {
                     }}
                     customButtons={(position) => {
                         return (
-                            <View style={{ justifyContent: "center", alignItems: "center", height: 70, width: "100%" }}>
+                            <View style={styles.btn}>
                                 {position == 2 ?
                                     <Button
                                         width={200}
@@ -79,18 +79,23 @@ export default WalkThrough = () => {
                                         textColor={Colors.white}
                                         backgroundColor={Colors.primary} />
                                     :
-                                    <TouchableOpacity style={{ height: 70, width: 70, borderRadius: 35, justifyContent: "center", alignItems: "center", backgroundColor: Colors.primary }}>
+                                    <TouchableOpacity style={styles.arrowBtn}>
                                         <AntDesign
                                             name="arrowright"
                                             style={{ fontSize: 25, color: Colors.white }}
                                         />
                                     </TouchableOpacity>
                                 }
+                                {position == 2 ? null :
+                                    <TouchableOpacity style={{ flex: 1, marginVertical: 10 }}>
+                                        <Text
+                                            style={{ color: Colors.secondary, fontSize: 17, fontWeight: "bold" }}>Skip
+                                    </Text>
+                                    </TouchableOpacity>
+                                }
                             </View>
                         )
                     }} />
-            </View>
-            <View style={{ flex: 1, justifyContent: "space-evenly", alignItems: "center" }}>
             </View>
         </View>
     )
@@ -105,4 +110,16 @@ const styles = StyleSheet.create({
         paddingVertical: 60,
         justifyContent: "flex-end"
     },
+    btn: {
+        alignItems: "center",
+        height: 140, width: "100%"
+    },
+    arrowBtn: {
+        height: 70,
+        width: 70,
+        borderRadius: 35,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: Colors.primary
+    }
 });
