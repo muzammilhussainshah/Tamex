@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextInput } from 'react-native';
 import Colors from "../common/Colors"
 
-const CustomPickerInput = ({ borderRadius, placeHolder, }) => {
+const CustomPickerInput = ({ borderRadius, placeHolder, _func}) => {
     return (
         <TextInput
             style={{

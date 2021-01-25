@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import AppContainer from '../../container/AppContainer';
 import Colors from "../../common/Colors"
+import ShipmentIdQrCode from "../../components/shipmentIdQrCode"
+import Card from "../../components/CardsLoad"
 import {
-  Text,
   View,
   ScrollView,
   FlatList
 } from 'react-native';
-import ShipmentIdQrCode from "../../components/shipmentIdQrCode"
-import Card from "../../components/CardsLoad"
-
 const Load = () => {
   let DATA = [
     {
@@ -47,11 +45,13 @@ const Load = () => {
       heading={"Load"} >
       <View style={{ flex: 8, backgroundColor: Colors.bgColor }}>
         <ShipmentIdQrCode />
-        <ScrollView style={{ backgroundColor: Colors.bgColor, }} contentContainerStyle={{ paddingBottom: 100 }}>
+        <ScrollView style={{ backgroundColor: Colors.bgColor, }}  >
           <FlatList
             data={DATA}
-            renderItem={({ item, index, separators }) => (
-              <Card data={item} buttons={true} />
+            renderItem={({ item }) => (
+              <Card 
+              data={item} 
+              buttons={true} />
             )}
           />
         </ScrollView>
@@ -59,5 +59,4 @@ const Load = () => {
     </AppContainer >
   )
 };
-
 export default Load;

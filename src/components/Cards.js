@@ -52,11 +52,11 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                     <FontAwesome name="user" style={{ fontSize: 18, color: Colors.grey }} />
                 </View>
                 <View style={{ flex: 9, }}>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 0.8 }}>
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Recipent Name</Text>
                     </View>
-                    <View style={{ flex: 1 }}>
-                        <Text style={{ marginLeft: 7 }}>{data.recipeint_Name}</Text>
+                    <View style={{ flex: 1.2 }}>
+                        <Text style={{ marginLeft: 7,paddingHorizontal:5 }}>{data.recipeint_Name}</Text>
                     </View>
                 </View>
             </View>
@@ -65,10 +65,10 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                     <FontAwesome name="phone" style={{ fontSize: 18, color: Colors.grey }} />
                 </View>
                 <View style={{ flex: 9, }}>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 0.8 }}>
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Recipent Mobile</Text>
                     </View>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1.2 }}>
                         <Text style={{ marginLeft: 7 }}>{data.recipeint_Mobile}</Text>
                     </View>
                 </View>
@@ -78,10 +78,10 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                     <FontAwesome name="shopping-cart" style={{ fontSize: 18, color: Colors.grey }} />
                 </View>
                 <View style={{ flex: 9, }}>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 0.8 }}>
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>From</Text>
                     </View>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1.2 }}>
                         <Text style={{ marginLeft: 7 }}>{data.form}</Text>
                     </View>
                 </View>
@@ -91,10 +91,10 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                     <Fontisto name="map-marker-alt" style={{ fontSize: 18, color: Colors.grey }} />
                 </View>
                 <View style={{ flex: 9, }}>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 0.8}}>
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Destination</Text>
                     </View>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1.2 }}>
                         <Text style={{ marginLeft: 7 }}>{data.destination}</Text>
                     </View>
                 </View>
@@ -107,10 +107,10 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                     <Ionicons name="cash-outline" style={{ fontSize: 18, color: Colors.grey }} />
                 </View>
                 <View style={{ flex: 4, }}>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 0.8 }}>
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>COD</Text>
                     </View>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1.2 }}>
                         <Text style={{ marginLeft: 7 }}>{data.cordination}</Text>
                     </View>
                 </View>
@@ -119,10 +119,10 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                     <FontAwesome5 name="cubes" style={{ fontSize: 18, color: Colors.grey }} />
                 </View>
                 <View style={{ flex: 4, }}>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 0.8}}>
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Number of PC's</Text>
                     </View>
-                    <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1.2 }}>
                         <Text style={{ marginLeft: 7 }}>{data.number_of_pcs}</Text>
                     </View>
                 </View>
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     card_Child1_Headeing_child2: { flex: 8, },
     card_Child1_Headeing_child2_Child1: { flex: 1, flexDirection: "row", alignItems: "center", marginLeft: 7, },
     listing: { flex: 0.7, marginTop: 5, flexDirection: "row", },
-    listing_Child1: { flex: 1, justifyContent: "center", alignItems: "center", },
+    listing_Child1: { flex: 1,   alignItems: "center", },
     card_Footer: { flex: 1, flexDirection: "row", justifyContent: "space-between" },
 });
 

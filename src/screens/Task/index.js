@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import AppContainer from '../../container/AppContainer';
 import Colors from "../../common/Colors"
 import {
-  Text,
   View,
   ScrollView,
   FlatList
@@ -47,11 +46,14 @@ const Task = () => {
       heading={"Task"} >
       <View style={{ flex: 8, backgroundColor: Colors.bgColor }}>
         <ShipmentIdQrCode />
-        <ScrollView style={{ backgroundColor: Colors.bgColor, }} contentContainerStyle={{ paddingBottom: 100 }}>
+        <ScrollView style={{ backgroundColor: Colors.bgColor, }} >
           <FlatList
             data={DATA}
             renderItem={({ item, index, separators }) => (
-              <Card data={item} buttons={true} dropdown={true} />
+              <Card 
+              data={item} 
+              buttons={true} 
+              dropdown={true} />
             )}
           />
         </ScrollView>
@@ -59,5 +61,4 @@ const Task = () => {
     </AppContainer >
   )
 };
-
 export default Task;
