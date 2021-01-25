@@ -7,7 +7,9 @@ import {
     Text,
     View
 } from 'react-native';
-const AppHeader = ({ heading }) => {
+import { Actions } from 'react-native-router-flux';
+
+const AppHeader = ({ heading, rightIcon, rightIconText }) => {
     return (
         <View
             style={styles.header}>
@@ -20,6 +22,13 @@ const AppHeader = ({ heading }) => {
             <View style={{ flex: 9, justifyContent: "center" }}>
                 <Text style={styles.lable}>{heading}</Text>
             </View>
+            {
+                rightIcon &&
+                <TouchableOpacity onPress={() => { Actions.pop() }} style={{ flex: 1.5, justifyContent: "center", padding: 10, }} >
+                    <Text style={{ color: "black", }}>{rightIconText}</Text>
+                </TouchableOpacity>
+            }
+
         </View>
     )
 };

@@ -35,7 +35,7 @@ const Login1Screen = () => {
                 />
                 <Button
                     name="Login"
-                    
+
                     textColor={Colors.white}
                     backgroundColor={Colors.primary} />
             </View>

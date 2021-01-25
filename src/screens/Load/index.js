@@ -8,9 +8,9 @@ import {
   FlatList
 } from 'react-native';
 import ShipmentIdQrCode from "../../components/shipmentIdQrCode"
-import Card from "../../components/Cards"
+import Card from "../../components/CardsLoad"
 
-const Task = () => {
+const Load = () => {
   let DATA = [
     {
       recipeint_Name: "Ali Mohamed Hasan",
@@ -44,14 +44,14 @@ const Task = () => {
     <AppContainer
       msgScreen={true}
       drawerProps={true}
-      heading={"Task"} >
+      heading={"Load"} >
       <View style={{ flex: 8, backgroundColor: Colors.bgColor }}>
         <ShipmentIdQrCode />
         <ScrollView style={{ backgroundColor: Colors.bgColor, }} contentContainerStyle={{ paddingBottom: 100 }}>
           <FlatList
             data={DATA}
             renderItem={({ item, index, separators }) => (
-              <Card data={item} buttons={true} dropdown={true} />
+              <Card data={item} buttons={true} />
             )}
           />
         </ScrollView>
@@ -60,4 +60,4 @@ const Task = () => {
   )
 };
 
-export default Task;
+export default Load;

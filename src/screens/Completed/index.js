@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
 import AppContainer from '../../container/AppContainer';
-import Colors from "../../common/Colors"
+import Colors from "../../common/Colors";
+import Card from "../../components/Cards";
+import React, {
+  useState
+} from 'react';
 import {
   Text,
   View,
   ScrollView,
   FlatList
 } from 'react-native';
-import { Tabs, Tab, TabHeading, } from 'native-base';
-import Card from "../../components/Cards"
-
+import {
+  Tabs,
+  Tab,
+  TabHeading,
+} from 'native-base';
 const Completed = () => {
   const [activeColor, setActiveColor] = useState("Completed");
   const activeColorChange = (key) => {
@@ -65,10 +70,12 @@ const Completed = () => {
               <TabHeading
                 style={{ flexDirection: "column", backgroundColor: Colors.bgColor }}
               >
-                <Text style={{ color: activeColor === "Completed" ? Colors.secondary : Colors.grey, fontWeight: "bold" }}>Completed</Text>
+                <Text
+                 style={{ color: activeColor === "Completed" ? Colors.secondary : Colors.grey, fontWeight: "bold" }}>Completed
+                </Text>
               </TabHeading>}
           >
-            <ScrollView style={{ backgroundColor: Colors.bgColor, }} contentContainerStyle={{ paddingBottom: 100 }}>
+            <ScrollView style={{ backgroundColor: Colors.bgColor, }} >
               <FlatList
                 data={DATA}
                 renderItem={({ item, index, separators }) => (
@@ -82,15 +89,19 @@ const Completed = () => {
               <TabHeading
                 style={{ flexDirection: "column", backgroundColor: Colors.bgColor }}
               >
-                <Text style={{ color: activeColor === "Failed" ? Colors.secondary : Colors.grey, fontWeight: "bold" }}>Failed</Text>
+                <Text 
+                style={{ color: activeColor === "Failed" ? Colors.secondary : Colors.grey, fontWeight: "bold" }}>Failed
+                </Text>
               </TabHeading>
             }
           >
-            <ScrollView style={{ backgroundColor: Colors.bgColor, }} contentContainerStyle={{ paddingBottom: 100 }}>
+            <ScrollView style={{ backgroundColor: Colors.bgColor, }}  >
               <FlatList
                 data={DATA}
                 renderItem={({ item, index, separators }) => (
-                  <Card data={item} buttons={true} />
+                  <Card 
+                  data={item}
+                   buttons={true} />
                 )}
               />
             </ScrollView>
@@ -100,5 +111,4 @@ const Completed = () => {
     </AppContainer >
   )
 };
-
 export default Completed;

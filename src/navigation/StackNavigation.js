@@ -8,6 +8,13 @@ import Task from '../screens/Task/index';
 import WalkThrough from '../screens/WalkThrough/index';
 import Home from '../screens/Home/index';
 import Login1Screen from "../screens/Login1Screen/index"
+
+import Load from '../screens/Load/index';
+import Notes from '../screens/Notes/index';
+import Faild from '../screens/Faild/index';
+import Delivered from '../screens/Delivered/index';
+
+
 export default Route = () => {
   const [initial, setInitial] = useState("WalkThrough");
   useEffect(() => {
@@ -27,6 +34,7 @@ export default Route = () => {
       titleStyle={{ color: "white" }}
       tintColor="white">
       <Scene>
+
         {/* <Scene key='Completed' component={Completed} hideNavBar={true}  /> */}
         {/* <Scene key='SplashScreen' component={Login1Screen} hideNavBar={true}  /> */}
         {/* <Scene key='LoginScreen' component={LoginScreen} hideNavBar={true}  /> */}
@@ -34,6 +42,15 @@ export default Route = () => {
         {/* <Scene key='Login1Screen' component={Login1Screen} hideNavBar={true}  /> */}
           {/* <Scene key='Task' component={Task} hideNavBar={true} initial />
           <Scene key='Home' component={Home} hideNavBar={true} /> */}
+
+        <Scene key='Home' component={Home} hideNavBar={true} initial />
+        <Scene key='Load' component={Load} hideNavBar={true} />
+        <Scene key='Task' component={Task} hideNavBar={true} />
+        <Scene key='Completed' component={Completed} hideNavBar={true} />
+        <Scene key='Notes' component={Notes} hideNavBar={true} />
+        <Scene key='Faild' component={Faild} hideNavBar={true} />
+        <Scene key='Delivered' component={Delivered} hideNavBar={true} />
+
       </Scene>
     </Router>
   );

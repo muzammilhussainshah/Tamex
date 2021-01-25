@@ -10,10 +10,10 @@ import {
   View
 } from 'react-native';
 import { Col } from 'native-base';
-const PhoneNumber = ({ CheckMark,placeholderTextColor, maxLength, passwordShow, placeHolder, _func }) => {
+const PhoneNumber = ({ CheckMark, placeholderTextColor, maxLength, passwordShow, placeHolder, _func }) => {
   return (
     <View style={styles.mainView}>
-      <View style={ styles.country  }>
+      <View style={styles.country}>
         <TouchableOpacity style={{ flexDirection: "row" }}>
           < FastImage
             style={{ height: 20, width: 20, }}
@@ -25,7 +25,7 @@ const PhoneNumber = ({ CheckMark,placeholderTextColor, maxLength, passwordShow, 
             </Text>
         </TouchableOpacity>
       </View>
-      <View style={{ flex: CheckMark ? 6.5 : 8  }}>
+      <View style={{ flex: CheckMark ? 6.5 : 8 }}>
         <TextInput
           style={{ fontSize: 17, paddingHorizontal: 15, }}
           maxLength={maxLength}
@@ -37,7 +37,8 @@ const PhoneNumber = ({ CheckMark,placeholderTextColor, maxLength, passwordShow, 
         />
       </View>
       {CheckMark &&
-        <View style={{ flex: 1.5, justifyContent: "center", alignItems: "center" }}>
+
+        < View style={{ flex: 1.5, justifyContent: "center", alignItems: "center" }}>
           <TouchableOpacity style={styles.CheckMark}>
             <Ionicons
               name="checkmark-sharp"
@@ -45,7 +46,7 @@ const PhoneNumber = ({ CheckMark,placeholderTextColor, maxLength, passwordShow, 
           </TouchableOpacity>
         </View>
       }
-    </View>
+    </View >
   );
 }
 const styles = StyleSheet.create({
@@ -55,14 +56,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 15,
     flexDirection: "row",
-    alignItems:"center",
+    alignItems: "center",
     // justifyContent:"center",
     width: "100%",
     backgroundColor: Colors.white
   },
   country: {
     flex: 2,
-    height:30,
+    height: 30,
     justifyContent: "center",
     alignItems: "center",
     borderRightWidth: 1,

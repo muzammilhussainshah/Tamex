@@ -17,12 +17,15 @@ const Button = ({ backgroundColor, key, marginTop, width, _func, name, textColor
                 }
                 ]}>
             {
-                name === "Faild" &&
-                <Entypo name="cross" style={{ fontSize: 18, color: textColor, marginRight: 5 }} />
+                (name === "Faild" || name === "Reject") ? (
+                    <Entypo name="cross" style={{ fontSize: 18, color: textColor, marginRight: 5 }} />
+                ) : null
             }
             {
-                name === "Delivered" &&
-                <Entypo name="check" style={{ fontSize: 18, color: textColor, marginRight: 5 }} />
+                (name === "Delivered" || name === "Accept") ?
+                    (
+                        <Entypo name="check" style={{ fontSize: 18, color: textColor, marginRight: 5 }} />
+                    ) : null
             }
             <Text style={[styles.buttonText, { color: textColor }]}>{name}</Text>
         </TouchableOpacity>

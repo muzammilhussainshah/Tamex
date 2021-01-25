@@ -16,10 +16,10 @@ export default data = [
     },
     {
         id: '2',
-        title: 'Appointments',
+        title: 'Load',
         iconName: "profile",
         color: Colors.shade,
-        route: "Home",
+        route: "Load",
     },
     {
         id: '3',
