@@ -17,10 +17,10 @@ const LoginScreen = () => {
     const [phoneNumber, setPhoneNumber] = useState("");
     return (
         <ScrollView style={{ backgroundColor: Colors.bgColor }} >
-            <View style={{ height: 250, alignItems: 'center' }}>
+            <View style={{ height: 270, alignItems: 'center' }}>
                 < FastImage
-                    style={{ height: 350, width: 350, marginTop: 30 }}
-                    source={require("../../assets/girl.png")}
+                    style={{ height: 270, width: 270, marginTop: 12 }}
+                    source={require("../../assets/gilr.png")}
                     resizeMode="contain"
                 />
             </View>

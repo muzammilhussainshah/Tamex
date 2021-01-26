@@ -1,9 +1,10 @@
 import React from "react";
 import AppContainer from '../../container/AppContainer';
-import Colors from "../../common/Colors"
-import Ionicons from "react-native-vector-icons/Ionicons"
-import FastImage from 'react-native-fast-image'
-import Entypo from "react-native-vector-icons/Entypo"
+import Colors from "../../common/Colors";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import Pie from 'react-native-pie';
+import FastImage from 'react-native-fast-image';
+import Entypo from "react-native-vector-icons/Entypo";
 import {
   Text,
   StyleSheet,
@@ -24,6 +25,26 @@ const Home = () => {
               <View style={styles.circleTwo}>
                 <View style={styles.circleThree}>
                   <View style={styles.circleFour}>
+                    <View style={{ alignItems: 'center' }}>
+                      <Pie
+                        radius={60}
+                        innerRadius={50}
+                        sections={[
+                          {
+                            percentage: 75,
+                            color: Colors.primary,
+                          },
+                        ]}
+                        backgroundColor={Colors.white}
+                      />
+                      <View
+                        style={styles.gauge}
+                      >
+                        <Text
+                          style={styles.gaugeText}>75%
+                        </Text>
+                      </View>
+                    </View>
                   </View>
                 </View>
               </View>
@@ -183,6 +204,19 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     justifyContent: 'center',
     alignItems: "center"
+  },
+  gauge: {
+    position: 'absolute',
+    width: '100%',
+    height: "100%",
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  gaugeText: {
+    backgroundColor: 'transparent',
+    color: Colors.primary,
+    fontWeight: "bold",
+    fontSize: 24,
   },
   circleThree: {
     height: 160,

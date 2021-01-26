@@ -34,16 +34,16 @@ export default Route = () => {
       titleStyle={{ color: "white" }}
       tintColor="white">
       <Scene>
-        <Scene key='Completed' component={Completed} hideNavBar={true} />
-        <Scene key='SplashScreen' component={Login1Screen} hideNavBar={true} />
+        {/* <Scene key='Completed' component={Completed} hideNavBar={true} /> */}
+        {/* <Scene key='Login1Screen' component={Login1Screen} hideNavBar={true} /> */}
         <Scene key='LoginScreen' component={LoginScreen} hideNavBar={true} />
-        <Scene key='WalkThrough' component={WalkThrough} hideNavBar={true} />
-        <Scene key='Home' component={Home} hideNavBar={true} initial />
-        <Scene key='Task' component={Task} hideNavBar={true} />
+        {/* <Scene key='WalkThrough' component={WalkThrough} hideNavBar={true} /> */}
+        {/* <Scene key='Home' component={Home} hideNavBar={true} initial /> */}
+        {/* <Scene key='Task' component={Task} hideNavBar={true} />
         <Scene key='Load' component={Load} hideNavBar={true} />
         <Scene key='Notes' component={Notes} hideNavBar={true} />
         <Scene key='Faild' component={Faild} hideNavBar={true} />
-        <Scene key='Delivered' component={Delivered} hideNavBar={true} />
+        <Scene key='Delivered' component={Delivered} hideNavBar={true} /> */}
       </Scene>
     </Router>
   );
