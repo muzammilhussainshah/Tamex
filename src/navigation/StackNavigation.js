@@ -38,9 +38,9 @@ export default Route = () => {
       titleStyle={{ color: "white" }}
       tintColor="white">
       <Scene>
-        <Scene key='MenuBar' component={MenuBar} hideNavBar={true} />
+        {/* <Scene key='MenuBar' component={MenuBar} hideNavBar={true} /> */}
         <Scene key='SettingScreen' component={SettingScreen} hideNavBar={true} />
-        <Scene key='ProfileScreen' component={ProfileScreen} hideNavBar={true} />
+        {/* <Scene key='ProfileScreen' component={ProfileScreen} hideNavBar={true} />
         <Scene key='AboutTamEx' component={AboutTamEx} hideNavBar={true} />
         <Scene key='Completed' component={Completed} hideNavBar={true} />
         <Scene key='Login1Screen' component={Login1Screen} hideNavBar={true} />
@@ -51,7 +51,7 @@ export default Route = () => {
         <Scene key='Load' component={Load} hideNavBar={true} />
         <Scene key='Notes' component={Notes} hideNavBar={true} />
         <Scene key='Faild' component={Faild} hideNavBar={true} />
-        <Scene key='Delivered' component={Delivered} hideNavBar={true} />
+        <Scene key='Delivered' component={Delivered} hideNavBar={true} /> */}
       </Scene>
     </Router>
   );
