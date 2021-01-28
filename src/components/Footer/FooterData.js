@@ -28,4 +28,17 @@ export default data = [
         color: Colors.shade ,
         route: "Home",
     },
+    {
+        id: '4',
+        title: 'Settings',
+        iconName: "Settings",
+        color: Colors.shade ,
+        route: "Settings",
+    }, {
+        id: '4',
+        title: 'Account',
+        iconName: "Account",
+        color: Colors.shade ,
+        route: "Account",
+    },
 ]

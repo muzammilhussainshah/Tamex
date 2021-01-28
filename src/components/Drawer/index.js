@@ -133,7 +133,6 @@ const MenuBar = () => {
                 </View>
                 <View style={{ flex: 8.5, justifyContent: "center" }}>
                     <Text style={styles.title}>Logout</Text>
-
                 </View>
             </TouchableOpacity>
         </View>

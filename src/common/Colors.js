@@ -9,4 +9,5 @@ export default {
     transprent: 'rgba(52, 52, 52, 0)' ,
     green: "#00a075",
     red: "red",
+    fontClr:"#565656",
 }
