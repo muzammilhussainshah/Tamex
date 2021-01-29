@@ -5,10 +5,10 @@ import {
     View,
 } from 'react-native';
 
-export default AppContainer = ({ firstImg, secondImg,rightIcon, children, heading ,rightIconName}) => {
+export default AppContainer = ({ firstImg, secondImg,rightIcon,rightIconText, children, heading ,rightIconName}) => {
     return (
         <View style={{ flex: 1, }}>
-            <AppHeader heading={heading} secondImg={secondImg} rightIcon={rightIcon} firstImg={firstImg} rightIconName={rightIconName} />
+            <AppHeader heading={heading} secondImg={secondImg} rightIconText={rightIconText} rightIcon={rightIcon} firstImg={firstImg} rightIconName={rightIconName} />
             {children}
             <AppFooter heading={heading} />
         </View>

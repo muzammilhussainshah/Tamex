@@ -7,7 +7,9 @@ export default {
     blk: "black",
     grey: "#B6B6B6",
     transprent: 'rgba(52, 52, 52, 0)' ,
+    transprentShade: 'rgba(66, 66, 66, 0.6)' ,
+    LogOutDiv: 'rgba(66, 66, 66, 0.6)' ,
+    red:"#f5354a",
     green: "#00a075",
-    red: "red",
     fontClr:"#565656",
 }

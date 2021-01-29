@@ -15,7 +15,11 @@ const AppHeader = ({ heading, rightIcon, rightIconName, rightIconText }) => {
     return (
         <View
             style={styles.header}>
-            <TouchableOpacity style={{ flex: 1, justifyContent: "center" }} >
+            <TouchableOpacity style={{ flex: 1, justifyContent: "center" }} 
+                onPress={()=>{
+                    Actions.MenuBar()
+                }}
+            >
                 <Ionicons
                     name="menu-outline"
                     style={{ color: Colors.primary, fontSize: 25 }}
@@ -31,9 +35,9 @@ const AppHeader = ({ heading, rightIcon, rightIconName, rightIconText }) => {
                 </TouchableOpacity>
             }
             {rightIcon && rightIconName &&
-                <TouchableOpacity 
-                onPress={() => { Actions.Home() }}
-                style={{ flex: 1.5, alignItems: 'flex-end', justifyContent: "center", }} >
+                <TouchableOpacity
+                    onPress={() => { Actions.EditProfileScreen() }}
+                    style={{ flex: 1.5, alignItems: 'flex-end', justifyContent: "center", }} >
                     <Feather
                         name={rightIconName}
                         style={{ color: Colors.primary, fontSize: 22 }}
