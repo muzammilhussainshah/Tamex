@@ -3,6 +3,7 @@ import Button from "../../components/LoginBtn";
 import FastImage from 'react-native-fast-image';
 import PhoneNumber from "../../components/inputNumber";
 import InputPassword from "../../components/inputPassword";
+import { Actions } from "react-native-router-flux";
 import React, {
     useState
 } from "react";
@@ -42,6 +43,7 @@ const LoginScreen = () => {
                     _func={(text) => setPass(text)}
                 />
                 <Button
+                    _func={() => { Actions.Home() }}
                     name="Login"
                     textColor={Colors.white}
                     backgroundColor={Colors.shade} />

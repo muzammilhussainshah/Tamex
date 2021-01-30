@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Router, Scene, } from 'react-native-router-flux'
 import Completed from '../screens/Completed/index';
-import SplashScreen from '../screens/SplashScreen/index';
 import LoginScreen from "../screens/LoginScreen/index"
 import Task from '../screens/Task/index';
 import WalkThrough from '../screens/WalkThrough/index';
@@ -26,7 +25,7 @@ export default Route = () => {
   const routInitiliaz = async () => {
     const WalkThrough = await AsyncStorage.getItem('WalkThrough')
     if (WalkThrough) {
-      setInitial("SignIn")
+      setInitial("Home")
     }
     await AsyncStorage.setItem('WalkThrough', "true")
   }
@@ -36,6 +35,8 @@ export default Route = () => {
       titleStyle={{ color: "white" }}
       tintColor="white">
       <Scene>
+        <Scene key='WalkThrough' component={WalkThrough} hideNavBar={true} initial={initial === "WalkThrough" ? true : false} />
+        <Scene key='Home' component={Home} hideNavBar={true} initial={initial === "SignIn" ? true : false} />
         <Scene key='MenuBar' component={MenuBar} hideNavBar={true} />
         <Scene key='LogOut' component={LogOut} hideNavBar={true} />
         <Scene key='SettingScreen' component={SettingScreen} hideNavBar={true} />
@@ -45,8 +46,6 @@ export default Route = () => {
         <Scene key='Completed' component={Completed} hideNavBar={true} />
         <Scene key='Login1Screen' component={Login1Screen} hideNavBar={true} />
         <Scene key='LoginScreen' component={LoginScreen} hideNavBar={true} />
-        <Scene key='WalkThrough' component={WalkThrough} hideNavBar={true} />
-        <Scene key='Home' component={Home} hideNavBar={true} initial />
         <Scene key='Task' component={Task} hideNavBar={true} />
         <Scene key='Load' component={Load} hideNavBar={true} />
         <Scene key='Notes' component={Notes} hideNavBar={true} />

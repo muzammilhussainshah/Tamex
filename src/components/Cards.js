@@ -56,7 +56,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Recipent Name</Text>
                     </View>
                     <View style={{ flex: 1.2 }}>
-                        <Text style={{ marginLeft: 7,paddingHorizontal:5 }}>{data.recipeint_Name}</Text>
+                        <Text style={{ marginLeft: 7, paddingHorizontal: 5 }}>{data.recipeint_Name}</Text>
                     </View>
                 </View>
             </View>
@@ -91,7 +91,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                     <Fontisto name="map-marker-alt" style={{ fontSize: 18, color: Colors.grey }} />
                 </View>
                 <View style={{ flex: 9, }}>
-                    <View style={{ flex: 0.8}}>
+                    <View style={{ flex: 0.8 }}>
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Destination</Text>
                     </View>
                     <View style={{ flex: 1.2 }}>
@@ -119,7 +119,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                     <FontAwesome5 name="cubes" style={{ fontSize: 18, color: Colors.grey }} />
                 </View>
                 <View style={{ flex: 4, }}>
-                    <View style={{ flex: 0.8}}>
+                    <View style={{ flex: 0.8 }}>
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Number of PC's</Text>
                     </View>
                     <View style={{ flex: 1.2 }}>
@@ -130,8 +130,23 @@ const Card = ({ _func, buttons, data, dropdown }) => {
             {
                 buttons &&
                 <View style={styles.card_Footer}>
-                    <Button withIcon={true} _func={() => routChange("Faild")} backgroundColor={Colors.white} borderColor={Colors.red} name={"Faild"} textColor={Colors.red} marginTop={12} width={160} />
-                    <Button withIcon={true} _func={() => routChange("Delivered")} backgroundColor={Colors.primary} borderColor={Colors.primary} name={"Delivered"} textColor={Colors.white} marginTop={12} width={160} />
+                    <Button
+                        withIcon={true} 
+                        _func={() => routChange("Faild")}
+                         backgroundColor={Colors.white}
+                          borderColor={Colors.red} 
+                          name={"Faild"}
+                           textColor={Colors.red} 
+                           marginTop={12} 
+                           width={"47%"} />
+                    <Button
+                        withIcon={true}
+                        _func={() => routChange("Delivered")}
+                        backgroundColor={Colors.primary}
+                        borderColor={Colors.primary} name={"Delivered"}
+                        textColor={Colors.white}
+                        marginTop={12}
+                        width={"47%"} />
                 </View>
             }
         </View>
@@ -145,7 +160,7 @@ const styles = StyleSheet.create({
     card_Child1_Headeing_child2: { flex: 8, },
     card_Child1_Headeing_child2_Child1: { flex: 1, flexDirection: "row", alignItems: "center", marginLeft: 7, },
     listing: { flex: 0.7, marginTop: 5, flexDirection: "row", },
-    listing_Child1: { flex: 1,   alignItems: "center", },
+    listing_Child1: { flex: 1, alignItems: "center", },
     card_Footer: { flex: 1, flexDirection: "row", justifyContent: "space-between" },
 });
 

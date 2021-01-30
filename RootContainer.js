@@ -8,15 +8,15 @@ const RootContainer = () => {
 
   useEffect(() => {
     console.disableYellowBox = true
-    // setTimeout(() => {
-    //   setSplash(false)
-    // }, 0);
+    setTimeout(() => {
+      setSplash(false)
+    },1000);
   }, [])
 
   return (
-    // Splash ?
-    //   <SplashScreen /> 
-      // :
+    Splash ?
+      <SplashScreen /> 
+      :
       <StackNavigation />
   )
 };
@@ -25,5 +25,4 @@ const mapStateToProp = ({ root }) => ({
 });
 const mapDispatchToProp = (dispatch) => ({
 });
-export default connect(mapStateToProp, mapDispatchToProp)(RootContainer);
-
+export default connect(mapStateToProp, mapDispatchToProp)(RootContainer)

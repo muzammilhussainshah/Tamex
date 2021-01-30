@@ -111,7 +111,7 @@ const CardLoad = ({ _func, buttons, data }) => {
                         name={"Reject"}
                         textColor={Colors.red}
                         marginTop={12}
-                        width={160}
+                        width={"47%"}
                     />
                     <Button
                         withIcon={true}
@@ -120,7 +120,7 @@ const CardLoad = ({ _func, buttons, data }) => {
                         name={"Accept"}
                         textColor={Colors.white}
                         marginTop={12}
-                        width={160}
+                        width={"47%"}
                     />
                 </View>
             }

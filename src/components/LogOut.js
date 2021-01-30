@@ -1,14 +1,15 @@
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Colors from '../common/Colors';
-import Button from "../components/LoginBtn"
-import React from "react"; 
+import Button from "../components/LoginBtn";
+import { Actions } from "react-native-router-flux";
+import React from "react";
 import {
     Text,
     StyleSheet,
     View,
     TouchableOpacity,
 } from 'react-native';
-const LogOut = ({_func}) => {
+const LogOut = ({ _func }) => {
     return (
         <View style={styles.logoutAbsolute}>
             <View style={styles.notification}>
@@ -27,6 +28,7 @@ const LogOut = ({_func}) => {
                 </View>
                 <View style={{ flex: 2 }}>
                     <Button
+                        _func={() => { Actions.LoginScreen() }}
                         name="Logout"
                         width="100%"
                         textColor={Colors.white}
