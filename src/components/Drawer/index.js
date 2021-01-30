@@ -121,17 +121,17 @@ const MenuBar = () => {
                 <View style={styles.profileData}>
                     <View style={{ flex: 2.5, justifyContent: "center", alignItems: "center" }}>
                         < FastImage
-                            style={{ height: 75, width: 75 }}
+                            style={{ height: "95%", width: "95%" }}
                             source={require("../../assets/profile.png")}
                             resizeMode="contain"
                         />
                     </View>
                     <View style={{ flex: 7.5, justifyContent: "center" }}>
                         <Text
-                            style={{ fontSize: 19, fontWeight: "bold", color: Colors.primary }}>Jhone Deo
+                            style={styles.userName}>Jhone Deo
                          </Text>
                         <Text
-                            style={{ fontSize: 15, color: Colors.shade }}>+20109375663
+                            style={{ fontSize: 15, color: Colors.shade, paddingHorizontal: 8 }}>+20109375663
                          </Text>
                     </View>
                 </View>
@@ -188,21 +188,33 @@ const styles = StyleSheet.create({
         fontWeight: "bold"
     },
     header: {
-        flex: 8.5, 
+        flex: 8.5,
         backgroundColor: Colors.bgColor,
         zIndex: 2
     },
     item: {
-        backgroundColor: Colors.bgColor, 
+        backgroundColor: Colors.bgColor,
         flexDirection: "row",
-        paddingHorizontal: 10 
+        paddingHorizontal: 10
     },
     title: {
         fontSize: 20,
         fontWeight: "bold",
         color: Colors.primary,
     },
-    profileData: { flex: 2.1, borderTopWidth: 1, borderTopColor: Colors.white, paddingHorizontal: 15, flexDirection: 'row' },
+    profileData: {
+        flex: 2.1,
+        borderTopWidth: 1,
+        borderTopColor: Colors.white,
+        paddingHorizontal: 15,
+        flexDirection: 'row'
+    },
+    userName: {
+        fontSize: 19,
+        fontWeight: "bold",
+        paddingHorizontal: 8,
+        color: Colors.primary
+    }
 });
 
 export default MenuBar;
