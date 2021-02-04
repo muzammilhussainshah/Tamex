@@ -13,7 +13,7 @@ import {
     View,
     ScrollView,
 } from 'react-native';
-const LoginScreen = () => {
+const LoginScreen = ({imgPath,dialCode}) => {
     const [pass, setPass] = useState('')
     const [phoneNumber, setPhoneNumber] = useState("");
     return (
@@ -32,6 +32,8 @@ const LoginScreen = () => {
             </View>
             <View style={{ paddingHorizontal: 10 }}>
                 <PhoneNumber
+                imgPath={imgPath}
+                dialCode={dialCode}
                     maxLength={10}
                     borderRadius={10}
                     placeholderTextColor={Colors.grey}

@@ -14,6 +14,7 @@ import Home from '../screens/Home/index';
 import MenuBar from '../components/Drawer/index';
 import Login1Screen from "../screens/Login1Screen/index"
 import Load from '../screens/Load/index';
+import CountryLists from '../components/countryLists';
 import Notes from '../screens/Notes/index';
 import Faild from '../screens/Faild/index';
 import Delivered from '../screens/Delivered/index';
@@ -38,6 +39,7 @@ export default Route = () => {
         <Scene key='WalkThrough' component={WalkThrough} hideNavBar={true} initial={initial === "WalkThrough" ? true : false} />
         <Scene key='Home' component={Home} hideNavBar={true} initial={initial === "SignIn" ? true : false} />
         <Scene key='MenuBar' component={MenuBar} hideNavBar={true} />
+        <Scene key='CountryLists' component={CountryLists} hideNavBar={true} />
         <Scene key='LogOut' component={LogOut} hideNavBar={true} />
         <Scene key='SettingScreen' component={SettingScreen} hideNavBar={true} />
         <Scene key='ProfileScreen' component={ProfileScreen} hideNavBar={true} />

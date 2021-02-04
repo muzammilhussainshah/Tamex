@@ -1,5 +1,6 @@
 import FastImage from 'react-native-fast-image';
 import Ionicons from "react-native-vector-icons/Ionicons";
+import CountryCodePicker from './CountryCodePicker';
 import Colors from "../common/Colors";
 import React from "react";
 import {
@@ -10,11 +11,11 @@ import {
   View
 } from 'react-native';
 import { Col } from 'native-base';
-const PhoneNumber = ({ CheckMark, placeholderTextColor, maxLength, passwordShow, placeHolder, _func }) => {
+const PhoneNumber = ({imgPath,dialCode, CheckMark, placeholderTextColor, maxLength, passwordShow, placeHolder, _func }) => {
   return (
     <View style={styles.mainView}>
       <View style={styles.country}>
-        <TouchableOpacity style={{ flexDirection: "row" }}>
+        {/* <TouchableOpacity style={{ flexDirection: "row" }}>
           < FastImage
             style={{ height: 20, width: 20, }}
             source={require("../assets/numberIcon.png")}
@@ -23,7 +24,8 @@ const PhoneNumber = ({ CheckMark, placeholderTextColor, maxLength, passwordShow,
           <Text
             style={{ fontWeight: "bold", fontSize: 15, color: Colors.primaryFont }}> + 2
             </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <CountryCodePicker  imgPath={imgPath} dialCode={dialCode}/>
       </View>
       <View style={{ flex: CheckMark ? 6.5 : 8 }}>
         <TextInput
@@ -63,7 +65,6 @@ const styles = StyleSheet.create({
   },
   country: {
     flex: 2,
-    height: 30,
     justifyContent: "center",
     alignItems: "center",
     borderRightWidth: 1,

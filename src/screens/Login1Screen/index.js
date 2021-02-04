@@ -18,7 +18,7 @@ const Login1Screen = () => {
         <ScrollView style={{ backgroundColor: Colors.bgColor }} >
             <View style={{ height: 100, justifyContent: "center" }}>
                 <Text
-                    style={styles.header}>Welcome Back!
+                    style={styles.header}>Welcome Bsssack!
                  </Text>
             </View>
             <View style={{ paddingHorizontal: 10 }}>
