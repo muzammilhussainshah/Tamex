@@ -5,12 +5,19 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import Pie from 'react-native-pie';
 import FastImage from 'react-native-fast-image';
 import Entypo from "react-native-vector-icons/Entypo";
+import { connect } from "react-redux";
+import styles from "./style"
 import {
   Text,
-  StyleSheet,
   View
 } from 'react-native';
-const Home = () => {
+const Home = ({ stats  }) => {
+  // console.log(stats,"stats")
+  let total = stats.total
+  let failed = stats.failed
+  let complete = stats.successful
+  let pending = total - [failed + complete]
+  let totalPercent = Math.floor([complete - failed] / [total] * [100])
   return (
     <AppContainer
       msgScreen={true}
@@ -31,7 +38,7 @@ const Home = () => {
                         innerRadius={50}
                         sections={[
                           {
-                            percentage: 75,
+                            percentage: totalPercent,
                             color: Colors.primary,
                           },
                         ]}
@@ -41,7 +48,7 @@ const Home = () => {
                         style={styles.gauge}
                       >
                         <Text
-                          style={styles.gaugeText}>75%
+                          style={styles.gaugeText}>{totalPercent + "%"}
                         </Text>
                       </View>
                     </View>
@@ -70,7 +77,7 @@ const Home = () => {
                       style={{ fontSize: 17, color: Colors.white }} />
                   </View>
                   <Text
-                    style={{ fontSize: 25, fontWeight: "bold", color: Colors.primary }}>25
+                    style={{ fontSize: 25, fontWeight: "bold", color: Colors.primary }}>{stats.pickup}
                   </Text>
                 </View>
               </View>
@@ -85,7 +92,7 @@ const Home = () => {
                       style={{ fontSize: 15, color: Colors.white }} />
                   </View>
                   <Text
-                    style={{ fontSize: 25, fontWeight: "bold", color: Colors.primary }}>13
+                    style={{ fontSize: 25, fontWeight: "bold", color: Colors.primary }}>{stats.delivery}
                   </Text>
                 </View>
               </View>
@@ -108,7 +115,7 @@ const Home = () => {
                   resizeMode={FastImage.resizeMode.stretch}
                 />
                 <Text
-                  style={{ fontSize: 25, fontWeight: "bold", color: Colors.primary }}>18
+                  style={{ fontSize: 25, fontWeight: "bold", color: Colors.primary }}>{stats.successful}
                 </Text>
               </View>
             </View>
@@ -123,8 +130,8 @@ const Home = () => {
                   resizeMode={FastImage.resizeMode.stretch}
                 />
                 <Text
-                  style={{ fontSize: 25, fontWeight: "bold", color: Colors.primary }}>10
-                 </Text>
+                  style={{ fontSize: 25, fontWeight: "bold", color: Colors.primary }}>{pending}
+                </Text>
               </View>
             </View>
             <View style={styles.failedDiv}>
@@ -138,7 +145,7 @@ const Home = () => {
                   resizeMode={FastImage.resizeMode.stretch}
                 />
                 <Text
-                  style={{ fontSize: 25, fontWeight: "bold", color: Colors.primary }}>05
+                  style={{ fontSize: 25, fontWeight: "bold", color: Colors.primary }}>{stats.failed}
                 </Text>
               </View>
             </View>
@@ -166,7 +173,8 @@ const Home = () => {
               </View>
               <View style={{ flex: 5, justifyContent: "center" }}>
                 <Text
-                  style={{ fontSize: 28, fontWeight: "bold", color: Colors.primary, }}>$3,251.88
+                  style={{ fontSize: 28, fontWeight: "bold", color: Colors.primary, }}>${stats.TotalCOD}
+                  {/* style={{ fontSize: 28, fontWeight: "bold", color: Colors.primary, }}>$3,251.88 */}
                 </Text>
               </View>
             </View>
@@ -179,191 +187,18 @@ const Home = () => {
     </AppContainer>
   )
 };
-const styles = StyleSheet.create({
-  percent: {
-    position: "absolute",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    height: "60%"
+
+const mapStateToProp = ({ root }) => ({
+  currentUser: root.currentUser,
+  isLoader: root.isLoader,
+  isError: root.isError,
+  stats: root.stats,
+})
+const mapDispatchToProp = (dispatch) => ({
+  _logout: (currentUser) => {
+    dispatch(_logout(currentUser));
   },
-  circleOne: {
-    height: 250,
-    width: 250,
-    borderRadius: 125,
-    borderColor: Colors.white,
-    borderWidth: 2,
-    justifyContent: 'center',
-    alignItems: "center"
-  },
-  circleTwo: {
-    height: 205,
-    width: 205,
-    borderRadius: 102.5,
-    borderColor: Colors.white,
-    borderWidth: 2,
-    justifyContent: 'center',
-    alignItems: "center"
-  },
-  gauge: {
-    position: 'absolute',
-    width: '100%',
-    height: "100%",
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  gaugeText: {
-    backgroundColor: 'transparent',
-    color: Colors.primary,
-    fontWeight: "bold",
-    fontSize: 24,
-  },
-  circleThree: {
-    height: 160,
-    width: 160,
-    borderRadius: 130,
-    borderColor: Colors.white,
-    borderWidth: 2,
-    justifyContent: 'center',
-    alignItems: "center"
-  },
-  circleFour: {
-    height: 115,
-    width: 115,
-    borderRadius: 57.5,
-    borderColor: Colors.white,
-    borderWidth: 2,
-    justifyContent: 'center',
-    alignItems: "center"
-  },
-  Shipments: {
-    fontSize: 20,
-    flex: 2.5,
-    fontWeight: "bold",
-    color: Colors.primary,
-    paddingHorizontal: 10
-  },
-  divOne: {
-    backgroundColor: Colors.white,
-    justifyContent: "space-evenly",
-    margin: 1,
-    borderRadius: 10,
-    height: "100%",
-    width: "45%"
-  },
-  divOneFChild: {
-    flexDirection: 'row',
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    width: "50%"
-  },
-  homeIcon: {
-    height: 26,
-    width: 26,
-    borderRadius: 13,
-    backgroundColor: Colors.secondary,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  divTwo: {
-    backgroundColor: Colors.white,
-    justifyContent: "space-evenly",
-    margin: 1,
-    borderRadius: 10,
-    height: "100%",
-    width: "45%"
-  },
-  divTwoFChild: {
-    flexDirection: 'row',
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    width: "50%"
-  },
-  flag: {
-    height: 26,
-    width: 26,
-    borderRadius: 13,
-    backgroundColor: Colors.secondary,
-    justifyContent: 'center',
-    alignItems: "center"
-  },
-  status: {
-    fontSize: 20,
-    flex: 1.8,
-    fontWeight: "bold",
-    color: Colors.primary,
-    paddingHorizontal: 10
-  },
-  complete: {
-    backgroundColor: Colors.white,
-    justifyContent: "space-evenly",
-    margin: 1,
-    borderRadius: 10,
-    height: "95%",
-    width: "30%"
-  },
-  completeImg: {
-    flexDirection: 'row',
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    width: "80%"
-  },
-  pending: {
-    backgroundColor: Colors.white,
-    justifyContent: "space-evenly",
-    margin: 1,
-    borderRadius: 10,
-    height: "95%",
-    width: "30%"
-  },
-  pendingImg: {
-    flexDirection: 'row',
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    width: "80%"
-  },
-  failedDiv: {
-    backgroundColor: Colors.white,
-    justifyContent: "space-evenly",
-    margin: 1,
-    borderRadius: 10,
-    height: "95%",
-    width: "30%"
-  },
-  failImg: {
-    flexDirection: 'row',
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    width: "80%"
-  },
-  balanceImg: {
-    height: "100%",
-    width: "100%",
-    position: "absolute",
-    zIndex: 2,
-    alignItems: 'center'
-  },
-  balance: {
-    fontSize: 20,
-    flex: 2.5,
-    fontWeight: "bold",
-    color: Colors.primary,
-    paddingHorizontal: 10
-  },
-  lastDiv: {
-    flex: 7.5,
-    flexDirection: "row",
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  BalanceDiv: {
-    backgroundColor: Colors.white,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    margin: 1,
-    borderRadius: 10,
-    height: "80%",
-    width: "95%"
-  },
-});
-export default Home;
+})
+
+
+export default connect(mapStateToProp, mapDispatchToProp)(Home);

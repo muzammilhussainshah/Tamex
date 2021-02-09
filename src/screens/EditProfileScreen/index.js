@@ -1,6 +1,7 @@
 import Entypo from "react-native-vector-icons/Entypo";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import FastImage from 'react-native-fast-image';
+import { connect } from "react-redux";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Button from "../../components/LoginBtn"
 import Colors from '../../common/Colors';
@@ -11,7 +12,9 @@ import {
   View,
   TouchableOpacity
 } from 'react-native';
-const EditProfileScreen = () => {
+const EditProfileScreen = ({ profile }) => {
+  let name = profile.name;
+  let profileSrc = profile.profile_photo;
   return (
     <AppContainer
       msgScreen={true}
@@ -28,11 +31,21 @@ const EditProfileScreen = () => {
           </View>
           <View style={styles.body}>
             <View style={styles.profilePic}>
-              <FastImage
-                style={{ height: 90, width: 90, }}
-                source={require("../../assets/profile.png")}
-                resizeMode={FastImage.resizeMode.stretch}
-              />
+              {profileSrc === '' ?
+                <FastImage
+                  style={{ height: 87, width: 85,borderRadius:45 }}
+                  source={require("../../assets/defaultUser.png")
+                  }
+                  resizeMode={FastImage.resizeMode.stretch}
+                />
+                :
+                <FastImage
+                  style={{ height: 90, width: 90, }}
+                  source={profileSrc
+                  }
+                  resizeMode={FastImage.resizeMode.stretch}
+                />
+              }
               <TouchableOpacity style={styles.absolutedWork}>
                 <TouchableOpacity style={styles.plusSign}>
                   <FontAwesome5
@@ -44,7 +57,7 @@ const EditProfileScreen = () => {
             </View>
             <View style={styles.userNameView}>
               <Text
-                style={{ fontSize: 27, fontWeight: "bold", color: Colors.primary }}>John Doe
+                style={{ fontSize: 27, fontWeight: "bold", color: Colors.primary }}>{name}
               </Text>
             </View>
           </View>
@@ -162,9 +175,9 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   absolutedWork: {
-    height: 90,
-    width: 90,
-    borderRadius: 45,
+    height: 83,
+    width: 80,
+    borderRadius: 40,
     position: "absolute",
     zIndex: 2
   },
@@ -221,4 +234,12 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
 });
-export default EditProfileScreen;
+const mapStateToProp = ({ root }) => ({
+  profile: root.profile,
+})
+const mapDispatchToProp = (dispatch) => ({
+  _logout: (currentUser) => {
+    dispatch(_logout(currentUser));
+  },
+})
+export default connect(mapStateToProp, mapDispatchToProp)(EditProfileScreen);

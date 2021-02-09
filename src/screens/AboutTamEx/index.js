@@ -1,6 +1,7 @@
 import Entypo from "react-native-vector-icons/Entypo";
 import FastImage from 'react-native-fast-image';
 import AppContainer from "../../container/AppContainer";
+import { connect } from "react-redux";
 import Colors from '../../common/Colors';
 import React from "react";
 import {
@@ -24,11 +25,11 @@ const DATA = [
     title: '+2010366479',
   },
 ];
-const Item = ({ title }) => (
+const Item = ({ title ,phoneNmber}) => (
   <View style={styles.item}>
     <View style={{ height: 50, width: "70%", justifyContent: "center" }}>
       <Text
-        style={{ fontSize: 19, letterSpacing: 0.2, color: Colors.fontClr }}>{title}
+        style={{ fontSize: 19, letterSpacing: 0.2, color: Colors.fontClr }}>+{phoneNmber}
       </Text>
     </View>
     <View style={{ height: 50, width: "30%", justifyContent: "center", alignItems: "center" }}>
@@ -44,10 +45,11 @@ const Item = ({ title }) => (
     </View>
   </View>
 );
-const AboutTamEx = () => {
+const AboutTamEx = ({ aboutus }) => {
   const renderItem = ({ item }) => (
-    <Item title={item.title} />
+    <Item title={item.title} phoneNmber={aboutus.Phone} />
   );
+  console.log(aboutus)
   return (
     <AppContainer
       msgScreen={true}
@@ -61,12 +63,13 @@ const AboutTamEx = () => {
             resizeMode={FastImage.resizeMode.contain}
           />
         </View>
-        <View style={{ flex: 2.5, justifyContent: "space-evenly" }}>
+        <View style={{ flex: 2.5 }}>
           <Text
             style={{ fontSize: 20, fontWeight: "bold", color: Colors.primary }}>About us
            </Text>
           <Text
-            style={styles.dummyText}>TamEx is an International Limit company, one of the fastest growing companies in the transport and parcel delivery sector.
+            style={styles.dummyText}>{aboutus.Description.replace(/\s+/g, " ")
+            }
           </Text>
         </View>
         <View style={{ flex: 5.5 }}>
@@ -119,4 +122,12 @@ const styles = StyleSheet.create({
   }
 
 });
-export default AboutTamEx;
+const mapStateToProp = ({ root }) => ({
+  aboutus: root.aboutus,
+})
+const mapDispatchToProp = (dispatch) => ({
+  _logout: (currentUser) => {
+    dispatch(_logout(currentUser));
+  },
+})
+export default connect(mapStateToProp, mapDispatchToProp)(AboutTamEx);

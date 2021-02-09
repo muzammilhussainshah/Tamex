@@ -10,23 +10,11 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { Col } from 'native-base';
+
 const PhoneNumber = ({imgPath,dialCode, CheckMark, placeholderTextColor, maxLength, passwordShow, placeHolder, _func }) => {
   return (
-    <View style={styles.mainView}>
-      <View style={styles.country}>
-        {/* <TouchableOpacity style={{ flexDirection: "row" }}>
-          < FastImage
-            style={{ height: 20, width: 20, }}
-            source={require("../assets/numberIcon.png")}
-            resizeMode="contain"
-          />
-          <Text
-            style={{ fontWeight: "bold", fontSize: 15, color: Colors.primaryFont }}> + 2
-            </Text>
-        </TouchableOpacity> */}
-        <CountryCodePicker  imgPath={imgPath} dialCode={dialCode}/>
-      </View>
+    <>
+     
       <View style={{ flex: CheckMark ? 6.5 : 8 }}>
         <TextInput
           style={{ fontSize: 17, paddingHorizontal: 15, }}
@@ -48,27 +36,10 @@ const PhoneNumber = ({imgPath,dialCode, CheckMark, placeholderTextColor, maxLeng
           </TouchableOpacity>
         </View>
       }
-    </View >
+    </ >
   );
 }
 const styles = StyleSheet.create({
-  mainView: {
-    height: 70,
-    borderRadius: 15,
-    paddingHorizontal: 10,
-    paddingVertical: 15,
-    flexDirection: "row",
-    alignItems: "center",
-    // justifyContent:"center",
-    width: "100%",
-    backgroundColor: Colors.white
-  },
-  country: {
-    flex: 2,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRightWidth: 1,
-  },
   CheckMark: {
     height: 20,
     width: 20,

@@ -1,15 +1,17 @@
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Colors from '../common/Colors';
 import Button from "../components/LoginBtn";
-import { Actions } from "react-native-router-flux";
+import { connect } from 'react-redux';
+import { _logout } from "../store/action/action";
 import React from "react";
 import {
     Text,
     StyleSheet,
     View,
+    ActivityIndicator,
     TouchableOpacity,
 } from 'react-native';
-const LogOut = ({ _func }) => {
+const LogOut = ({isError, isLoader,_func, _logout,currentUser }) => {
     return (
         <View style={styles.logoutAbsolute}>
             <View style={styles.notification}>
@@ -27,18 +29,30 @@ const LogOut = ({ _func }) => {
                     </Text>
                 </View>
                 <View style={{ flex: 2 }}>
-                    <Button
-                        _func={() => { Actions.LoginScreen() }}
-                        name="Logout"
-                        width="100%"
-                        textColor={Colors.white}
-                        backgroundColor={"#f5354a"} />
+
+                    {isLoader ?
+                        <ActivityIndicator
+                            style={{ marginTop: "10%" }}
+                            size="small" color={Colors.primary}
+                        /> :
+                        <Button
+                            // _func={() => { Actions.LoginScreen() }}
+                            _func={() => { _logout(currentUser) }}
+                            name="Logout"
+                            width="100%"
+                            textColor={Colors.white}
+                            backgroundColor={"#f5354a"} />
+                    }
+                    {isError !== "" &&
+                        <Text
+                            style={{ color: "red", fontSize: 12, alignSelf: "center" }}>{isError}
+                        </Text>}
                 </View>
                 <TouchableOpacity
                     onPress={_func}
                     activeOpacity={0.8}
                     style={{ flex: 2, justifyContent: "center", alignItems: "center" }}>
-                    <Text style={styles.cancle}> Cancle</Text>
+                    <Text style={styles.cancle}> Cancel</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -76,4 +90,17 @@ const styles = StyleSheet.create({
         color: Colors.secondary
     }
 });
-export default LogOut;
+
+const mapStateToProp = ({ root }) => ({
+    currentUser: root.currentUser,
+    isLoader: root.isLoader,
+    isError: root.isError,
+})
+const mapDispatchToProp = (dispatch) => ({
+    _logout: (currentUser) => {
+        dispatch(_logout(currentUser));
+    },
+})
+
+
+export default connect(mapStateToProp, mapDispatchToProp)(LogOut);

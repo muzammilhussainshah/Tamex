@@ -3,19 +3,27 @@ import Button from "../../components/LoginBtn";
 import FastImage from 'react-native-fast-image';
 import PhoneNumber from "../../components/inputNumber";
 import InputPassword from "../../components/inputPassword";
-import { Actions } from "react-native-router-flux";
+import CountryCodePicker from '../../components/CountryCodePicker';
+import { connect } from 'react-redux';
+import { _login } from "../../store/action/action";
 import React, {
-    useState
+    useState, useEffect
 } from "react";
 import {
     Text,
     StyleSheet,
     View,
+    ActivityIndicator,
     ScrollView,
 } from 'react-native';
-const LoginScreen = ({imgPath,dialCode}) => {
-    const [pass, setPass] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState("");
+
+const LoginScreen = ({ imgPath, dialCode,isLoader,isError, _login }) => {
+    const [dialCodeState, setdialCodeState] = useState('1');
+    const [password, setPass] = useState('1234');
+    const [phoneNumber, setPhoneNumber] = useState("6112");
+    useEffect(() => {
+        dialCode && setdialCodeState(dialCode)
+    }, [])
     return (
         <ScrollView style={{ backgroundColor: Colors.bgColor }} >
             <View style={{ height: 270, alignItems: 'center' }}>
@@ -31,24 +39,43 @@ const LoginScreen = ({imgPath,dialCode}) => {
                  </Text>
             </View>
             <View style={{ paddingHorizontal: 10 }}>
-                <PhoneNumber
-                imgPath={imgPath}
-                dialCode={dialCode}
-                    maxLength={10}
-                    borderRadius={10}
-                    placeholderTextColor={Colors.grey}
-                    _func={(text) => setPhoneNumber(text)}
-                    placeHolder="Phone number"
-                />
+                <View style={styles.mainView}>
+                    <View style={styles.country}>
+                        <CountryCodePicker imgPath={imgPath} dialCode={dialCode} />
+                    </View>
+                    <PhoneNumber
+                        imgPath={imgPath}
+                        dialCode={dialCode}
+                        maxLength={10}
+                        borderRadius={10}
+                        placeholderTextColor={Colors.grey}
+                        _func={(text) => setPhoneNumber(text)}
+                        placeHolder="Phone number"
+                    />
+
+                </View>
                 <InputPassword
                     placeholderTextColor={Colors.grey}
                     _func={(text) => setPass(text)}
                 />
-                <Button
-                    _func={() => { Actions.Home() }}
-                    name="Login"
-                    textColor={Colors.white}
-                    backgroundColor={Colors.shade} />
+
+
+                {isLoader ?
+                    <ActivityIndicator
+                        style={{ marginTop: "10%" }}
+                        size="small" color={Colors.primary}
+                    /> :
+                    <Button
+                        _func={() => _login(phoneNumber, password, dialCodeState)}
+                        name="Login"
+                        textColor={Colors.white}
+                        backgroundColor={Colors.shade} />
+                }
+                {isError !== "" &&
+                    <Text
+                        style={{ color: "red", fontSize: 12, alignSelf: "center" }}>{isError}
+                    </Text>}
+
             </View>
         </ScrollView>
     )
@@ -59,6 +86,35 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         fontWeight: "bold",
         color: Colors.primary
-    }
+    },
+    mainView: {
+        height: 70,
+        borderRadius: 15,
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        flexDirection: "row",
+        alignItems: "center",
+        // justifyContent:"center",
+        width: "100%",
+        backgroundColor: Colors.white
+    },
+    country: {
+        flex: 2,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRightWidth: 1,
+    },
 });
-export default LoginScreen;
+
+const mapStateToProp = ({ root }) => ({
+    currentUser: root.currentUser,
+    isLoader: root.isLoader,
+    isError: root.isError,
+})
+const mapDispatchToProp = (dispatch) => ({
+    _login: (phoneNumber, password, dialCodeState) => {
+        dispatch(_login(phoneNumber, password, dialCodeState));
+    },
+})
+
+export default connect(mapStateToProp, mapDispatchToProp)(LoginScreen);

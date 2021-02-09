@@ -1,6 +1,9 @@
 import Colors from "../../common/Colors";
 import AppHeader from '../../components/header/AppHeader';
 import Textarea from 'react-native-textarea';
+import { connect } from 'react-redux';
+import { _tasklist, _taskdelivered } from "../../store/action/action";
+import GetLocation from 'react-native-get-location'
 import CustomInput from "../../components/CustomInput";
 import DeliveredCard from "../../components/deliveredCard";
 import Button from "../../components/LoginBtn";
@@ -11,16 +14,73 @@ import {
     ScrollView
 } from 'react-native-gesture-handler';
 import React, {
-    useState
+    useState, useEffect
 } from 'react';
 import {
+    ActivityIndicator,
     Text,
     View,
     StyleSheet,
     Pressable
 } from 'react-native';
-const Delivered = () => {
+
+const Delivered = ({ taskId, _taskdelivered, isLoader, isError, currentUser, _tasklist, }) => {
     const [checkBoxBolean, setcheckBoxBolean] = useState(true);
+
+    const [taskIdh, setTaskIdh] = useState(taskId)
+    const [lati, setlati] = useState('')
+    const [long, setlong] = useState('')
+
+    const [textArea, setTextArea] = useState('')
+    const [location, setLocation] = useState('')
+    const [loading, setloading] = useState('')
+    const [securityCode, setSecurityCode] = useState('')
+    const [lastDigit, setLastDigits] = useState('')
+
+    //  tasklist[0].vtask_id
+    // console.log(taskId)
+    useEffect(() => {
+        _tasklist(currentUser)
+        _requestLocation()
+        // _taskdelivered()
+    }, [])
+
+    const _requestLocation = () => {
+        // this.setState({ loading: true, location: null });
+        setLocation(null)
+        setloading(true)
+        GetLocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 150000,
+        })
+            .then(location => {
+                setLocation(location)
+                setloading(false)
+                setlati(location.latitude)
+                setlong(location.longitude)
+                // console.log(location.longitude)
+                // console.log(lati,"lati")
+                // console.log(long,"long")
+            })
+            .catch(ex => {
+                const { code, message } = ex;
+                // console.warn(code, message);
+                if (code === 'CANCELLED') {
+                    Alert.alert('Location cancelled by user or by another request');
+                }
+                if (code === 'UNAVAILABLE') {
+                    Alert.alert('Location service is disabled or unavailable');
+                }
+                if (code === 'TIMEOUT') {
+                    Alert.alert('Location request timed out');
+                }
+                if (code === 'UNAUTHORIZED') {
+                    Alert.alert('Authorization denied');
+                }
+                setLocation(null)
+                setloading(false)
+            });
+    }
     return (
         <View style={{ flex: 1, backgroundColor: Colors.bgColor }}>
             <View style={{ height: 70, }}>
@@ -39,12 +99,16 @@ const Delivered = () => {
                     <View style={styles.customInput}>
                         <View style={{ width: "47%", height: 60, }}>
                             <CustomInput
+                                _func={(text) => setLastDigits(text)}
+                                maxLength={4}
                                 borderRadius={10}
                                 placeHolder={"ID last 4 digits"}
                             />
                         </View>
                         <View style={{ width: "47%", height: 60, }}>
                             <CustomInput
+                                _func={(text) => setSecurityCode(text)}
+
                                 borderRadius={10}
                                 placeHolder={"Security code"}
                             />
@@ -69,17 +133,31 @@ const Delivered = () => {
                             containerStyle={styles.textareaContainer}
                             style={styles.textarea}
                             maxLength={120}
+                            onChangeText={(text) => setTextArea(text)}
                             placeholder={'Notes'}
                             placeholderTextColor={'#c7c7c7'}
                             underlineColorAndroid={'transparent'}
                         />
                     </View>
                     <View style={{ marginTop: 20, justifyContent: "center", alignItems: "center" }}>
-                        <Button
-                            backgroundColor={Colors.primary}
-                            name={"Done"}
-                            textColor={Colors.white}
-                            width={"95%"} />
+
+
+                        {isLoader ?
+                            <ActivityIndicator
+                                style={{ marginTop: "10%" }}
+                                size="small" color={Colors.primary}
+                            /> :
+
+                            <Button
+                                _func={() => _taskdelivered(lati, long, taskIdh, textArea, securityCode, currentUser,lastDigit)}
+                                backgroundColor={Colors.primary}
+                                name={"Done"}
+                                textColor={Colors.white}
+                                width={"95%"} />}
+                        {isError !== "" &&
+                            <Text
+                                style={{ color: "red", fontSize: 15, alignSelf: "center" }}>{isError}
+                            </Text>}
                     </View>
                 </ScrollView>
             </View>
@@ -130,5 +208,20 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     }
 });
+const mapStateToProp = ({ root }) => ({
+    currentUser: root.currentUser,
+    isLoader: root.isLoader,
+    isError: root.isError,
+    tasklist: root.tasklist,
+})
+const mapDispatchToProp = (dispatch) => ({
+    _tasklist: (currentUser) => {
+        dispatch(_tasklist(currentUser));
+    },
+    _taskdelivered: (lati, long, taskIdh, textArea, securityCode, currentUser,lastDigit) => {
+        dispatch(_taskdelivered(lati, long, taskIdh, textArea, securityCode, currentUser,lastDigit));
+    },
 
-export default Delivered;
+})
+
+export default connect(mapStateToProp, mapDispatchToProp)(Delivered);

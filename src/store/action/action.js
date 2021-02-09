@@ -21,7 +21,6 @@ export function _error(err, time) {
 export const _checkIsEmptyObj = (obj) => {
     for (var key in obj) {
         if (!obj[key]) {
-            console.log(key + " is blank. Deleting it");
             return key
         }
     }
@@ -33,98 +32,41 @@ const _validateEmail = (email) => {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
-export const _gettopics = (currentUser) => { 
-    return async (dispatch) => {
-        try {
-            const option = {
-                method: 'GET',
-                url: `${BaseUrl}get_topics_list`,
-                headers: {
-                    'cache-control': 'no-cache',
-                    "Allow-Cross-Origin": '*',
-                    'Content-Type': 'application/json',
-                    "access-token": currentUser.headers["access-token"],
-                    "token-type": "Bearer",
-                    client: currentUser.headers.client,
-                    expiry: currentUser.headers.expiry,
-                    uid: currentUser.headers.uid,
-                },
-            };
-            var resp = await axios(option); 
-            // removeLastElem bcz this is not for rendreing
-            var topicList = resp.data.data;
-            dispatch({ type: ActionTypes.TOPICLIST, payload: topicList });
-            // Actions.Home();
-        }
-        catch (err) {
-            dispatch(_loading(false));
-            dispatch(_error(err.response.data.errors[0]));
-            console.log(err.response, "error from _login", JSON.parse(JSON.stringify(err.message)));
-        }
-    }
-}
 
-export const _getpotatoes = (currentUser) => {
+export const _login = (phoneNumber, password, dialCodeState) => {
     return async (dispatch) => {
-        try {
-            const option = {
-                method: 'GET',
-                url: `${BaseUrl}get_potatoes`,
-                headers: {
-                    'cache-control': 'no-cache',
-                    "Allow-Cross-Origin": '*',
-                    'Content-Type': 'application/json',
-                    "access-token": currentUser.headers["access-token"],
-                    "token-type": "Bearer",
-                    client: currentUser.headers.client,
-                    expiry: currentUser.headers.expiry,
-                    uid: currentUser.headers.uid,
-                },
-            };
-            var resp = await axios(option);
-            // removeLastElem bcz this is not for rendreing
-            var potatoes = resp.data;
-            potatoes.pop()
-            console.log(potatoes)
-            dispatch({ type: ActionTypes.FREEPOTATOES, payload: potatoes });
-            Actions.Home();
-        }
-        catch (err) {
-            dispatch(_loading(false));
-            dispatch(_error(err.response.data.errors[0]));
-            console.log(err.response, "error from _login", JSON.parse(JSON.stringify(err.message)));
-        }
-    }
-}
-
-export const _login = (email, password) => {
-    return async (dispatch) => {
-        if (_checkIsEmptyObj({ email, password })) {
-            dispatch(_error(`${_checkIsEmptyObj({ email, password })} is required.`));
+        if (_checkIsEmptyObj({ phoneNumber, password, })) {
+            dispatch(_error(`${_checkIsEmptyObj({ phoneNumber, password, })} is required.`));
         }
         else {
             dispatch(_loading(true))
             try {
                 const option = {
                     method: 'POST',
-                    url: `${BaseUrl}auth/sign_in`,
-                    headers: {
-                        'cache-control': 'no-cache',
-                        "Allow-Cross-Origin": '*',
-                    },
-                    data: { email, password }
+                    url: `${BaseUrl}user/login`,
+                    data: {
+                        "username": phoneNumber,
+                        "password": password,
+                        "pushtoken": "c92fd8c9608549b816990b789c220c1a"
+                    }
                 };
                 const resp = await axios(option);
-                console.log(resp,"_login")
-                if (resp.data.data.profile_completed) {
-                    dispatch(_getpotatoes(resp))
-                    // Actions.Home();
-                
+                if (resp.data.success === false) {
+                    dispatch(_error(resp.data.message));
                 }
                 else {
-                    Actions.ProfileScreen();
-                };
-                dispatch({ type: ActionTypes.CURRENTUSER, payload: resp });
+                    console.log(resp.data.data.token)
+                    const stat = await getStat(resp.data.data.token);
+                    const profile = await getProfile(resp.data.data.token);
+                    const aboutus = await getAboutus(resp.data.data.token);
+                    // const status = await getStatus(resp.data.data.token);
+                    dispatch({ type: ActionTypes.ABOUTUS, payload: aboutus });
+                    dispatch({ type: ActionTypes.PROFILE, payload: profile });
+                    dispatch({ type: ActionTypes.STATS, payload: stat });
+                    // dispatch({ type: ActionTypes.STATUS, payload: stat });
+                    dispatch({ type: ActionTypes.CURRENTUSER, payload: resp.data });
+                    Actions.Home();
+                }
                 dispatch(_loading(false));
             }
             catch (err) {
@@ -135,104 +77,190 @@ export const _login = (email, password) => {
         }
     }
 }
-
-
-export const _signUp = (user) => {
+export const _tasklist = (currentUser) => {
     return async (dispatch) => {
-        if (!_validateEmail(user["Username or email"])) {
-            dispatch(_error(`Invalid email`));
-        }
-        else {
-            if (_checkIsEmptyObj(user)) {
-                dispatch(_error(`${_checkIsEmptyObj(user)} is required.`));
+        // console.log(currentUser.data.token)
+
+        dispatch(_loading(true))
+        try {
+            const option = {
+                method: 'POST',
+                url: `${BaseUrl}task/tasklist`,
+                data: {
+                    token: currentUser.data.token,
+                    "date": Date.now()
+                }
+            };
+            const resp = await axios(option);
+            if (resp.data.success === false) {
+                // console.log(resp.data)
+                dispatch(_error(resp.data.message));
             }
             else {
-                dispatch(_loading(true));
-                let userClone = {
-                    first_name: user["Full Name"],
-                    last_name: user["Full Name"],
-                    email: user["Username or email"],
-                    country: user["Country"],
-                    gender: user["Gender"],
-                    birth_day: user["Birthday"].split("-")[0],
-                    birth_month: user["Birthday"].split("-")[1],
-                    birth_year: user["Birthday"].split("-")[2],
-                    password: user["Password"],
-                    password_confirmation: user["Password"],
-                    potato_type: "free",
-                    status: "personal",
-                }
-                try {
-                    const option = {
-                        method: 'POST',
-                        url: `${BaseUrl}auth`,
-                        headers: {
-                            'cache-control': 'no-cache',
-                            "Allow-Cross-Origin": '*',
-                        },
-                        data: userClone
-                    }
-                    const resp = await axios(option);
-                    Actions.ProfileScreen();
-                    dispatch({ type: ActionTypes.CURRENTUSER, payload: resp });
-                    dispatch(_loading(false));
-                }
-                catch (err) {
-                    dispatch(_loading(false));
-                    dispatch(_error(err.response.data.errors[0]));
-                    console.log(err.response, "error from _signUp", err.response.data.errors);
-                }
+                // console.log(resp.data)
+
+                dispatch({ type: ActionTypes.TASKLIST, payload: resp.data.data.tasks });
+                // console.log(resp.data.data.tasks)
+                // dispatch({ type: ActionTypes.CURRENTUSER, payload: resp.data });
             }
-        }
-    }
-}
-
-// *********authentication*********
-// *********authentication*********
-// *********authentication*********
-
-
-export const _CreateProfile = (profile, currentUser) => {
-    console.log(profile,"_CreateProfile", currentUser)
-    return async (dispatch) => {
-        let profileClone = {
-            story: profile.StoryTitle,
-            first_name: currentUser.data.data.first_name,
-            last_name: currentUser.data.data.last_name,
-            can_help_in: profile.Help,
-            struggles: profile.Struggles,
-            description: profile.Description,
-            current_mood: profile.Mode,
-            country: currentUser.data.data.country,
-            gender: currentUser.data.data.gender,
-            current_problem: profile.CurrentProblems,
-            helpful_moto: profile.Helpfulmotto,
-        }
-        try {
-            dispatch(_loading(true));
-            const option = {
-                method: 'PUT',
-                url: `${BaseUrl}profile`,
-                headers: {
-                    'cache-control': 'no-cache',
-                    "Allow-Cross-Origin": '*',
-                    "access-token": currentUser.headers["access-token"],
-                    "token-type": "Bearer",
-                    client: currentUser.headers.client,
-                    expiry: currentUser.headers.expiry,
-                    uid: currentUser.headers.uid,
-                },
-                data: profileClone
-            }
-            const resp = await axios(option);
-            // console.log(resp,"_CreateProfile",currentUser.headers["access-token"],currentUser.headers.client,currentUser.headers.expiry,currentUser.headers.uid)
-            Actions.Ready({resp})
             dispatch(_loading(false));
         }
         catch (err) {
             dispatch(_loading(false));
             dispatch(_error(err.response.data.errors[0]));
-            console.log(err.response, "error from _CreateProfile", err.response.data.errors);
+            console.log(err.response, "error from _TASKLIST", JSON.parse(JSON.stringify(err.message)));
+        }
+
+    }
+}
+
+export const _taskdelivered = (lati, long, taskId, textArea, securityCode, currentUser,lastDigit) => {
+    // console.log(currentUser.data.token,)
+    // console.log(taskIdh, 'awb', "14362877151562")
+    // console.log(lati.toString(), 'lati', "24.25123") 
+    // console.log(securityCode, "code", "4444")
+    // console.log(long.toString(), "long", "80.25123")
+    // console.log(textArea, 'note', "ID:1252154228 ALI AHAMED")
+    return async (dispatch) => {
+        if (_checkIsEmptyObj({ textArea, securityCode, lastDigit})) {
+            dispatch(_error(`${_checkIsEmptyObj({ textArea, securityCode,lastDigit })} is required.`));
+        }
+        else {
+
+            dispatch(_loading(true))
+            try {
+                const option = {
+                    method: 'POST',
+                    url: `${BaseUrl}task/successful`,
+                    data: {
+                        token: currentUser.data.token,
+                        awb: taskId,
+                        lati: lati.toString(),
+                        lock: securityCode,
+                        long: long.toString(),
+                        note: textArea,
+                        
+                    }
+                };
+                const resp = await axios(option);
+                console.log(resp.data) 
+                if (resp.data.success === false) {
+                    console.log(resp.data.message)
+                    dispatch(_error(resp.data.message));
+                }
+                else { 
+                    dispatch({ type: ActionTypes.TASKDELIVERED, payload: resp.data });
+                }
+                dispatch(_loading(false));
+                Actions.Home()
+            }
+            catch (err) {
+                dispatch(_loading(false));
+                // dispatch(_error(err.response.data.errors[0]));
+                console.log(err.response, "error from _TASKLIST", JSON.parse(JSON.stringify(err.message)));
+            }
+        }
+
+    }
+}
+const getStat = async (token) => {
+    try {
+        const option = {
+            method: 'POST',
+            url: `${BaseUrl}user/stat`,
+            data: {
+                token: token,
+            }
+        };
+        const resp = await axios(option);
+        // console.log(resp.data)
+        return resp.data.data
+    }
+    catch (err) {
+        console.log(err.response, "error from getStat",);
+    }
+}
+const getAboutus = async (token) => {
+    try {
+        const option = {
+            method: 'POST',
+            url: `${BaseUrl}user/aboutus`,
+            data: {
+                token: token,
+            }
+        };
+        const resp = await axios(option);
+        return resp.data.data
+    }
+    catch (err) {
+        console.log(err.response, "error from getAboutus",);
+    }
+}
+
+const getTask = async (token) => {
+    try {
+        const option = {
+            method: 'POST',
+            url: `${BaseUrl}task/task`,
+            data: {
+                token: token,
+            }
+        };
+        const resp = await axios(option);
+        return resp.data.data
+    }
+    catch (err) {
+        console.log(err.response, "error from getTask",);
+    }
+}
+
+const getProfile = async (token) => {
+    try {
+        const option = {
+            method: 'POST',
+            url: `${BaseUrl}user/profile`,
+            data: {
+                token: token,
+            }
+        };
+        const resp = await axios(option);
+        return resp.data.data
+    }
+    catch (err) {
+        console.log(err.response, "error from getProfile",);
+    }
+}
+
+export const _logout = (currentUser) => {
+    return async (dispatch) => {
+        dispatch(_loading(true))
+        try {
+            const option = {
+                method: 'POST',
+                url: `${BaseUrl}user/logout`,
+                data: {
+                    token: currentUser.data.token,
+                }
+            };
+            const resp = await axios(option);
+            if (resp.data.success === false) {
+                dispatch(_error(resp.data.message));
+            }
+            else {
+                Actions.LoginScreen()
+                dispatch({ type: ActionTypes.CURRENTUSER, payload: "" });
+            }
+            dispatch(_loading(false));
+        }
+        catch (err) {
+            dispatch(_loading(false));
+            dispatch(_error(err.response.data.errors[0]));
+            console.log(err.response, "error from _logout", JSON.parse(JSON.stringify(err.message)));
         }
     }
 }
+
+// *********authentication*********
+// *********authentication*********
+// *********authentication*********
+

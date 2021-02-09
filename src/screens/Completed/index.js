@@ -1,8 +1,11 @@
 import AppContainer from '../../container/AppContainer';
+import { connect } from 'react-redux';
 import Colors from "../../common/Colors";
+import { _tasklist } from "../../store/action/action"
 import Card from "../../components/Cards";
 import React, {
-  useState
+  useState,
+  useEffect
 } from 'react';
 import {
   Text,
@@ -15,7 +18,12 @@ import {
   Tab,
   TabHeading,
 } from 'native-base';
-const Completed = () => {
+const Completed = ({ _tasklist, currentUser, tasklist }) => {
+  useEffect(() => {
+    _tasklist(currentUser)
+  }, [])
+
+  console.log(tasklist)
   const [activeColor, setActiveColor] = useState("Completed");
   const activeColorChange = (key) => {
     if (key.ref.key == ".0") {
@@ -27,32 +35,32 @@ const Completed = () => {
   }
   let DATA = [
     {
-      recipeint_Name: "Ali Mohamed Hasan",
-      recipeint_Mobile: "+971 5205521",
+      recipeint_Name: tasklist.length == 0 ? "Ali Mohamed Hasan" : tasklist[0].customer_name,
+      recipeint_Mobile: tasklist.length == 0 ? "+971 5205521" : tasklist[0].contact_number,
       form: "www.amazon.com",
-      destination: "Riyadh, Rawdia, Hassan Street Near Work Station",
-      cordination: "120.98",
-      number_of_pcs: "05",
-      deliveryNumber: "10294838759356"
+      destination: tasklist.length == 0 ? "Riyadh, Rawdia, Hassan Street Near Work Station" : tasklist[0].address_delivery,
+      cordination: tasklist.length == 0 ? "120.98" : tasklist[0].cod,
+      number_of_pcs: tasklist.length == 0 ? "05" : tasklist[0].numpc,
+      deliveryNumber: tasklist.length == 0 ? "10294838759356" : tasklist[0].numpc,
     },
     {
-      recipeint_Name: "Abdullah Shah",
-      recipeint_Mobile: "+971 5205521",
+      recipeint_Name: tasklist.length == 0 ? "Ali Mohamed Hasan" : tasklist[1].customer_name,
+      recipeint_Mobile: tasklist.length == 0 ? "+971 5205521" : tasklist[1].contact_number,
       form: "www.amazon.com",
-      destination: "Riyadh, Rawdia, Hassan Street Near Work Station",
-      cordination: "120.98",
-      number_of_pcs: "05",
-      deliveryNumber: "10294838759356"
+      destination: tasklist.length == 0 ? "Riyadh, Rawdia, Hassan Street Near Work Station" : tasklist[1].address_delivery,
+      cordination: tasklist.length == 0 ? "120.98" : tasklist[1].cod,
+      number_of_pcs: tasklist.length == 0 ? "05" : tasklist[1].numpc,
+      deliveryNumber: tasklist.length == 0 ? "10294838759356" : tasklist[1].numpc,
     },
     {
-      recipeint_Name: "Saghir Ahmed",
-      recipeint_Mobile: "+971 5205521",
+      recipeint_Name: tasklist.length == 0 ? "Ali Mohamed Hasan" : tasklist[2].customer_name,
+      recipeint_Mobile: tasklist.length == 0 ? "+971 5205521" : tasklist[2].contact_number,
       form: "www.amazon.com",
-      destination: "Riyadh, Rawdia, Hassan Street Near Work Station",
-      cordination: "120.98",
-      number_of_pcs: "05",
-      deliveryNumber: "10294838759356"
-    }
+      destination: tasklist.length == 0 ? "Riyadh, Rawdia, Hassan Street Near Work Station" : tasklist[2].address_delivery,
+      cordination: tasklist.length == 0 ? "120.98" : tasklist[2].cod,
+      number_of_pcs: tasklist.length == 0 ? "05" : tasklist[2].numpc,
+      deliveryNumber: tasklist.length == 0 ? "10294838759356" : tasklist[2].vtask_id,
+    },
   ]
   return (
     <AppContainer
@@ -71,7 +79,7 @@ const Completed = () => {
                 style={{ flexDirection: "column", backgroundColor: Colors.bgColor }}
               >
                 <Text
-                 style={{ color: activeColor === "Completed" ? Colors.secondary : Colors.grey, fontWeight: "bold" }}>Completed
+                  style={{ color: activeColor === "Completed" ? Colors.secondary : Colors.grey, fontWeight: "bold" }}>Completed
                 </Text>
               </TabHeading>}
           >
@@ -89,8 +97,8 @@ const Completed = () => {
               <TabHeading
                 style={{ flexDirection: "column", backgroundColor: Colors.bgColor }}
               >
-                <Text 
-                style={{ color: activeColor === "Failed" ? Colors.secondary : Colors.grey, fontWeight: "bold" }}>Failed
+                <Text
+                  style={{ color: activeColor === "Failed" ? Colors.secondary : Colors.grey, fontWeight: "bold" }}>Failed
                 </Text>
               </TabHeading>
             }
@@ -99,9 +107,9 @@ const Completed = () => {
               <FlatList
                 data={DATA}
                 renderItem={({ item, index, separators }) => (
-                  <Card 
-                  data={item}
-                   buttons={true} />
+                  <C ard
+                    data={item}
+                    buttons={true} />
                 )}
               />
             </ScrollView>
@@ -111,4 +119,16 @@ const Completed = () => {
     </AppContainer >
   )
 };
-export default Completed;
+const mapStateToProp = ({ root }) => ({
+  currentUser: root.currentUser,
+  isLoader: root.isLoader,
+  isError: root.isError,
+  tasklist: root.tasklist,
+})
+const mapDispatchToProp = (dispatch) => ({
+  _tasklist: (currentUser) => {
+    dispatch(_tasklist(currentUser));
+  },
+})
+
+export default connect(mapStateToProp, mapDispatchToProp)(Completed);

@@ -4,6 +4,7 @@ import * as Animatable from 'react-native-animatable';
 import LogOut from "../LogOut";
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { connect } from "react-redux";
 import Feather from "react-native-vector-icons/Feather";
 import FastImage from 'react-native-fast-image';
 import { Actions } from 'react-native-router-flux';
@@ -31,7 +32,7 @@ const Data = [
         title: 'Setting',
     },
     {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
+        id: '58694a0f-3da1-471f-bd96-145571e29d73',
         title: 'About TamEx',
     },
 ];
@@ -97,11 +98,13 @@ const Item = ({ title, name }) => (
         </View>
     </TouchableOpacity>
 );
-const MenuBar = () => {
+const MenuBar = ({ profile }) => {
     const [logOuteSelected, setLogOuteSelected] = useState(false);
     const renderItem = ({ item }) => (
         <Item title={item.title} />
     );
+    let name=profile.name 
+    console.log(profile)
     return (
         <Animatable.View
             animation="slideInLeft"
@@ -128,7 +131,7 @@ const MenuBar = () => {
                     </View>
                     <View style={{ flex: 7.5, justifyContent: "center" }}>
                         <Text
-                            style={styles.userName}>Jhone Deo
+                            style={styles.userName}>{name}
                          </Text>
                         <Text
                             style={{ fontSize: 15, color: Colors.shade, paddingHorizontal: 8 }}>+20109375663
@@ -210,6 +213,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     userName: {
+        textAlign:"left",
         fontSize: 19,
         fontWeight: "bold",
         paddingHorizontal: 8,
@@ -217,4 +221,14 @@ const styles = StyleSheet.create({
     }
 });
 
-export default MenuBar;
+const mapStateToProp = ({ root }) => ({
+    profile: root.profile,
+})
+const mapDispatchToProp = (dispatch) => ({
+    _logout: (currentUser) => {
+        dispatch(_logout(currentUser));
+    },
+})
+export default connect(mapStateToProp, mapDispatchToProp)(MenuBar);
+
+// export default MenuBar;

@@ -13,7 +13,7 @@ import { Actions } from 'react-native-router-flux';
 
 const Card = ({ _func, buttons, data, dropdown }) => {
     const routChange = (rout) => {
-        Actions[rout]()
+        Actions[rout]({ taskId: data.vtask_id })
     }
     return (
         <View onPress={_func} style={[styles.card, { height: buttons ? 470 : 420, }]}>
@@ -35,7 +35,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                         <Text style={{ marginLeft: 10 }}>Delivery</Text>
                     </View>
                     <View style={{ flex: 1, marginLeft: 7, justifyContent: "center", }}>
-                        <Text style={{ marginLeft: 5, fontWeight: "bold", fontSize: 16 }}>{data.deliveryNumber}</Text>
+                        <Text style={{ marginLeft: 5, fontWeight: "bold", fontSize: 16 }}>{data.vtask_id}</Text>
                     </View>
                 </View>
                 {
@@ -56,7 +56,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Recipent Name</Text>
                     </View>
                     <View style={{ flex: 1.2 }}>
-                        <Text style={{ marginLeft: 7, paddingHorizontal: 5 }}>{data.recipeint_Name}</Text>
+                        <Text style={{ marginLeft: 7, paddingHorizontal: 5 }}>{data.customer_name}</Text>
                     </View>
                 </View>
             </View>
@@ -69,7 +69,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Recipent Mobile</Text>
                     </View>
                     <View style={{ flex: 1.2 }}>
-                        <Text style={{ marginLeft: 7 }}>{data.recipeint_Mobile}</Text>
+                        <Text style={{ marginLeft: 7 }}>{data.contact_number}</Text>
                     </View>
                 </View>
             </View>
@@ -82,7 +82,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>From</Text>
                     </View>
                     <View style={{ flex: 1.2 }}>
-                        <Text style={{ marginLeft: 7 }}>{data.form}</Text>
+                        <Text style={{ marginLeft: 7 }}>www.amazon.com</Text>
                     </View>
                 </View>
             </View>
@@ -95,7 +95,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Destination</Text>
                     </View>
                     <View style={{ flex: 1.2 }}>
-                        <Text style={{ marginLeft: 7 }}>{data.destination}</Text>
+                        <Text style={{ marginLeft: 7 }}>{data.delivery_address}</Text>
                     </View>
                 </View>
             </View>
@@ -111,7 +111,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>COD</Text>
                     </View>
                     <View style={{ flex: 1.2 }}>
-                        <Text style={{ marginLeft: 7 }}>{data.cordination}</Text>
+                        <Text style={{ marginLeft: 7 }}>{data.cod}</Text>
                     </View>
                 </View>
 
@@ -123,7 +123,7 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                         <Text style={{ color: Colors.grey, marginLeft: 7 }}>Number of PC's</Text>
                     </View>
                     <View style={{ flex: 1.2 }}>
-                        <Text style={{ marginLeft: 7 }}>{data.number_of_pcs}</Text>
+                        <Text style={{ marginLeft: 7 }}>{data.numpc}</Text>
                     </View>
                 </View>
             </View>
@@ -131,17 +131,22 @@ const Card = ({ _func, buttons, data, dropdown }) => {
                 buttons &&
                 <View style={styles.card_Footer}>
                     <Button
-                        withIcon={true} 
-                        _func={() => routChange("Faild")}
-                         backgroundColor={Colors.white}
-                          borderColor={Colors.red} 
-                          name={"Faild"}
-                           textColor={Colors.red} 
-                           marginTop={12} 
-                           width={"47%"} />
+                        withIcon={true}
+                        _func={
+                            // () => alert(data.vtask_id)
+                            () => routChange("Faild")
+                        }
+                        backgroundColor={Colors.white}
+                        borderColor={Colors.red}
+                        name={"Faild"}
+                        textColor={Colors.red}
+                        marginTop={12}
+                        width={"47%"} />
                     <Button
                         withIcon={true}
-                        _func={() => routChange("Delivered")}
+                        _func={
+                            () => routChange("Delivered" )
+                        }
                         backgroundColor={Colors.primary}
                         borderColor={Colors.primary} name={"Delivered"}
                         textColor={Colors.white}

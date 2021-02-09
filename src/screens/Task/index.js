@@ -1,44 +1,68 @@
-import React  from 'react';
 import AppContainer from '../../container/AppContainer';
-import Colors from "../../common/Colors"
+import { connect } from 'react-redux';
+import Colors from "../../common/Colors";
+import { _tasklist } from "../../store/action/action";
+
+import React, {
+  useEffect,
+  useState,
+} from 'react';
 import {
   View,
   ScrollView,
   FlatList
 } from 'react-native';
-import ShipmentIdQrCode from "../../components/shipmentIdQrCode"
-import Card from "../../components/Cards"
+import ShipmentIdQrCode from "../../components/shipmentIdQrCode";
+import Card from "../../components/Cards";
+const Task = ({ _tasklist, currentUser, tasklist }) => {
+  useEffect(() => {
+    _tasklist(currentUser)
+    // _requestLocation()
+  }, [])
 
-const Task = () => {
-  let DATA = [
-    {
-      recipeint_Name: "Ali Mohamed Hasan",
-      recipeint_Mobile: "+971 5205521",
-      form: "www.amazon.com",
-      destination: "Riyadh, Rawdia, Hassan Street Near Work Station",
-      cordination: "120.98",
-      number_of_pcs: "05",
-      deliveryNumber: "10294838759356"
-    },
-    {
-      recipeint_Name: "Abdullah Shah",
-      recipeint_Mobile: "+971 5205521",
-      form: "www.amazon.com",
-      destination: "Riyadh, Rawdia, Hassan Street Near Work Station",
-      cordination: "120.98",
-      number_of_pcs: "05",
-      deliveryNumber: "10294838759356"
-    },
-    {
-      recipeint_Name: "Saghir Ahmed",
-      recipeint_Mobile: "+971 5205521",
-      form: "www.amazon.com",
-      destination: "Riyadh, Rawdia, Hassan Street Near Work Station",
-      cordination: "120.98",
-      number_of_pcs: "05",
-      deliveryNumber: "10294838759356"
-    }
-  ]
+// console.log(tasklist)
+
+
+  let DATA = {
+    no: 2,
+    
+    tasks: [
+      {
+        "vtask_id": "16540999783401",
+        "status": "acknowledged",
+        "customer_name": "Omar Saeed",
+        "contact_number": "96652479922",
+        "Khubar,Khubar": "address_delivery ",
+        "trans_type": "delivery",
+        "delivery_address": "ى,Khubar,Khubar,الخبر, حي البایونیھ مقابل مستشفى ",
+        "task_description": "La brezza",
+        "cod": "0.00",
+        "numpc": "1",
+        "task_lat": "",
+        "task_lng": "",
+        "customer_set_by": "VENDO"
+      },
+      {
+        "vtask_id": "14362877151562",
+        "status": "successful",
+        "customer_name": "Abdulmohsen alabdulkreem",
+        "contact_number": "9665525252263",
+        "Khubar,Khubar": "address_delivery ",
+        "delivery_address": "ى,Khubar,Khubar,الخبر, حي البایونیھ مقابل مستشفى ",
+
+        "trans_type": "delivery",
+        "task_description": "La brezza",
+        "cod": "0.00",
+        "numpc": "1",
+        "task_lat": "",
+        "task_lng": "",
+        "customer_set_by": "VENDO"
+      }
+    ]
+  }
+
+
+
   return (
     <AppContainer
       msgScreen={true}
@@ -48,12 +72,12 @@ const Task = () => {
         <ShipmentIdQrCode />
         <ScrollView style={{ backgroundColor: Colors.bgColor, }} >
           <FlatList
-            data={DATA}
+            data={DATA.tasks}
             renderItem={({ item, index, separators }) => (
-              <Card 
-              data={item} 
-              buttons={true} 
-              dropdown={true} />
+              <Card
+                data={item}
+                buttons={true}
+                dropdown={true} />
             )}
           />
         </ScrollView>
@@ -61,4 +85,17 @@ const Task = () => {
     </AppContainer >
   )
 };
-export default Task;
+
+const mapStateToProp = ({ root }) => ({
+  currentUser: root.currentUser,
+  isLoader: root.isLoader,
+  isError: root.isError,
+  tasklist: root.tasklist,
+})
+const mapDispatchToProp = (dispatch) => ({
+  _tasklist: (currentUser) => {
+    dispatch(_tasklist(currentUser));
+  },
+})
+
+export default connect(mapStateToProp, mapDispatchToProp)(Task);

@@ -10,6 +10,8 @@ target 'Tamex' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'ReactNativeGetLocation', :path => '../node_modules/react-native-get-location'
+
   target 'TamexTests' do
     inherit! :complete
     # Pods for testing

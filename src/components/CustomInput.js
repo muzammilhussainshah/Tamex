@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextInput } from 'react-native';
 import Colors from "../common/Colors"
 
-const CustomPickerInput = ({ borderRadius, placeHolder, _func}) => {
+const CustomPickerInput = ({ borderRadius, placeHolder,maxLength, _func}) => {
     return (
         <TextInput
             style={{
@@ -14,6 +14,7 @@ const CustomPickerInput = ({ borderRadius, placeHolder, _func}) => {
             }}
             onChangeText={(text) => _func(text)}
             // value={form}
+            maxLength={maxLength}
             placeholder={placeHolder}
             keyboardType={"numeric"}
         />

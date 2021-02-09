@@ -49,32 +49,28 @@ class CountryCodePicker extends Component {
 
   changePhoneCode() {
     // this.props.navigate.navigate("CountryLists")
-    Actions.CountryLists()
 
 
   }
 
   componentWillMount() {
-    const { imgPath,dialCode } = this.props;
-    if(imgPath)this.setState({imgPath,dialCode})
+    const { imgPath, dialCode } = this.props;
+    if (imgPath) this.setState({ imgPath, dialCode })
   }
   updatePhoneNumber(phoneNumber) {
     this.setState({ phoneNumber })
   }
 
   render() {
-    let { dialCode, phoneNumber, imgPath } = this.state
+    let { dialCode, phoneNumber, imgPath } = this.state;
     return (
-    
-            <TouchableOpacity
-              onPress={() => {
-                this.changePhoneCode()
-              }}
-              style={{width:"100%",flexDirection:"row",borderColor:"grey",justifyContent:"space-around", alignItems:"center"}}
-            >
-              <FlagsImg height={20} width={20} imgPath={imgPath} />
-                <Text style={{ fontWeight: "bold" }}>{"+" + dialCode}</Text>
-            </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => Actions.CountryLists()}
+        style={{ width: "100%", flexDirection: "row", borderColor: "grey", justifyContent: "space-around", alignItems: "center" }}
+      >
+        <FlagsImg height={20} width={20} imgPath={imgPath} />
+        <Text style={{ fontWeight: "bold" }}>{"+" + dialCode}</Text>
+      </TouchableOpacity>
     );
   }
 }
@@ -128,7 +124,7 @@ const styles = StyleSheet.create({
   cancleNumberContainer: {
     flex: 0.8,
     width: "100%",
-    backgroundColor:"red",
+    backgroundColor: "red",
     justifyContent: "center",
     alignItems: "center",
   },
