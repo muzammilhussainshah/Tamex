@@ -23,10 +23,9 @@ import {
     StyleSheet,
     Pressable
 } from 'react-native';
-
 const Delivered = ({ taskId, _taskdelivered, isLoader, isError, currentUser, _tasklist, }) => {
     const [checkBoxBolean, setcheckBoxBolean] = useState(true);
-
+    console.log(taskId)
     const [taskIdh, setTaskIdh] = useState(taskId)
     const [lati, setlati] = useState('')
     const [long, setlong] = useState('')
@@ -149,7 +148,7 @@ const Delivered = ({ taskId, _taskdelivered, isLoader, isError, currentUser, _ta
                             /> :
 
                             <Button
-                                _func={() => _taskdelivered(lati, long, taskIdh, textArea, securityCode, currentUser,lastDigit)}
+                                _func={() => _taskdelivered(lati, long, taskIdh, textArea, securityCode, currentUser, lastDigit)}
                                 backgroundColor={Colors.primary}
                                 name={"Done"}
                                 textColor={Colors.white}
@@ -218,8 +217,8 @@ const mapDispatchToProp = (dispatch) => ({
     _tasklist: (currentUser) => {
         dispatch(_tasklist(currentUser));
     },
-    _taskdelivered: (lati, long, taskIdh, textArea, securityCode, currentUser,lastDigit) => {
-        dispatch(_taskdelivered(lati, long, taskIdh, textArea, securityCode, currentUser,lastDigit));
+    _taskdelivered: (lati, long, taskIdh, textArea, securityCode, currentUser, lastDigit) => {
+        dispatch(_taskdelivered(lati, long, taskIdh, textArea, securityCode, currentUser, lastDigit));
     },
 
 })

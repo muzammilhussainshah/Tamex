@@ -6,7 +6,8 @@ const ActionTypes = {
     PROFILE: 'PROFILE',
     ABOUTUS: 'ABOUTUS', 
     TASKLIST: 'TASKLIST',
-    TASKDELIVERE:"TASKDELIVERED"
+    TASKDELIVERED:"TASKDELIVERED",
+    TASKFAILED:"TASKFAILED",
 
 }
 export default ActionTypes;

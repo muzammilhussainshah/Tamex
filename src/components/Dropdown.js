@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, } from 'react-native';
+import { View, StyleSheet, Picker } from 'react-native';
 import Colors from '../common/Colors';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 const Dropdown = ({ heading }) => {
     const [country, setCountry] = useState("");
+    console.log(country)
     return (
         <View style={styles.dd}>
-            <DropDownPicker
+            {/* <View style={styles.container}> */}
+            <Picker
+                mode= "dropdown" 
+                selectedValue={country}
+                style={{ height: "100%", width: "100%" }}
+                onValueChange={(itemValue, itemIndex) => setCountry(itemValue)}
+            >
+                <Picker.Item label="Java" value="java" />
+                <Picker.Item label="JavaScript" value="js" />
+            </Picker>
+            {/* </View> */}
+
+            {/* <DropDownPicker
                 items={[
                     { label: 'UK', value: 'uk' },
                     { label: 'France', value: 'france' },
@@ -18,8 +31,8 @@ const Dropdown = ({ heading }) => {
                 containerStyle={{ height: 50, width: "100%", }}
                 style={{ borderColor: "white", }}
                 itemStyle={{ justifyContent: 'flex-start', }}
-                onChangeItem={item => setCountry({ country: item.value })}
-            />
+                onChangeItem={item => setCountry(item.value)}
+            /> */}
         </View>
     );
 }

@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     aboutus: "",
     taskdelivered: [],
     tasklist: "",
+    taskFailed: "",
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -51,6 +52,12 @@ export default (state = INITIAL_STATE, action) => {
             return ({
                 ...state,
                 taskdelivered: action.payload
+            })
+
+        case ActionTypes.TASKFAILED:
+            return ({
+                ...state,
+                taskFailed: action.payload
             })
         default:
             return state;

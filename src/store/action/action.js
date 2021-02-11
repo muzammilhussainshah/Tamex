@@ -114,7 +114,7 @@ export const _tasklist = (currentUser) => {
     }
 }
 
-export const _taskdelivered = (lati, long, taskId, textArea, securityCode, currentUser,lastDigit) => {
+export const _taskdelivered = (lati, long, taskId, textArea, securityCode, currentUser, lastDigit) => {
     // console.log(currentUser.data.token,)
     // console.log(taskIdh, 'awb', "14362877151562")
     // console.log(lati.toString(), 'lati', "24.25123") 
@@ -122,8 +122,8 @@ export const _taskdelivered = (lati, long, taskId, textArea, securityCode, curre
     // console.log(long.toString(), "long", "80.25123")
     // console.log(textArea, 'note', "ID:1252154228 ALI AHAMED")
     return async (dispatch) => {
-        if (_checkIsEmptyObj({ textArea, securityCode, lastDigit})) {
-            dispatch(_error(`${_checkIsEmptyObj({ textArea, securityCode,lastDigit })} is required.`));
+        if (_checkIsEmptyObj({ textArea, securityCode, lastDigit })) {
+            dispatch(_error(`${_checkIsEmptyObj({ textArea, securityCode, lastDigit })} is required.`));
         }
         else {
 
@@ -139,16 +139,16 @@ export const _taskdelivered = (lati, long, taskId, textArea, securityCode, curre
                         lock: securityCode,
                         long: long.toString(),
                         note: textArea,
-                        
+
                     }
                 };
                 const resp = await axios(option);
-                console.log(resp.data) 
+                console.log(resp.data)
                 if (resp.data.success === false) {
                     console.log(resp.data.message)
                     dispatch(_error(resp.data.message));
                 }
-                else { 
+                else {
                     dispatch({ type: ActionTypes.TASKDELIVERED, payload: resp.data });
                 }
                 dispatch(_loading(false));
@@ -163,6 +163,58 @@ export const _taskdelivered = (lati, long, taskId, textArea, securityCode, curre
 
     }
 }
+export const _taskFailed = (lati, long, taskIdh,textArea, currentUser) => {
+    console.log(currentUser.data.token,)
+    console.log(textArea, 'note', "ID:1252154228 ALI AHAMED")
+    console.log(taskIdh, 'awb', "14362877151562")
+    console.log(lati.toString(), 'lati', "24.25123")
+    console.log(long.toString(), "long", "80.25123")
+    return async (dispatch) => {
+        if (_checkIsEmptyObj({ textArea, securityCode, lastDigit })) {
+            dispatch(_error(`${_checkIsEmptyObj({ textArea, securityCode, lastDigit })} is required.`));
+        }
+        else {
+
+            dispatch(_loading(true))
+            try {
+                const option = {
+                    method: 'POST',
+                    url: `${BaseUrl}task/successful`,
+                    data: {
+                        token: currentUser.data.token,
+                        awb: taskId,
+                        lati: lati.toString(),
+                        lock: securityCode,
+                        long: long.toString(),
+                        note: textArea,
+
+                    }
+                };
+                const resp = await axios(option);
+                console.log(resp.data)
+                if (resp.data.success === false) {
+                    console.log(resp.data.message)
+                    dispatch(_error(resp.data.message));
+                }
+                else {
+                    dispatch({ type: ActionTypes.TASKFAILED, payload: resp.data });
+                }
+                dispatch(_loading(false));
+                Actions.Home()
+            }
+            catch (err) {
+                dispatch(_loading(false));
+                // dispatch(_error(err.response.data.errors[0]));
+                console.log(err.response, "error from _TASKLIST", JSON.parse(JSON.stringify(err.message)));
+            }
+        }
+
+    }
+}
+
+
+
+
 const getStat = async (token) => {
     try {
         const option = {
