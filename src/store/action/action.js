@@ -55,7 +55,7 @@ export const _login = (phoneNumber, password, dialCodeState) => {
                     dispatch(_error(resp.data.message));
                 }
                 else {
-                    console.log(resp.data.data.token)
+                    console.log(resp.data,"login")
                     const stat = await getStat(resp.data.data.token);
                     const profile = await getProfile(resp.data.data.token);
                     const aboutus = await getAboutus(resp.data.data.token);
@@ -92,6 +92,7 @@ export const _tasklist = (currentUser) => {
                 }
             };
             const resp = await axios(option);
+            console.log(resp,"_tasklist")
             if (resp.data.success === false) {
                 // console.log(resp.data)
                 dispatch(_error(resp.data.message));
@@ -225,7 +226,7 @@ const getStat = async (token) => {
             }
         };
         const resp = await axios(option);
-        // console.log(resp.data)
+        console.log(resp.data,"getStat")
         return resp.data.data
     }
     catch (err) {
@@ -242,6 +243,7 @@ const getAboutus = async (token) => {
             }
         };
         const resp = await axios(option);
+        console.log(resp,"getAboutus")
         return resp.data.data
     }
     catch (err) {
@@ -276,6 +278,7 @@ const getProfile = async (token) => {
             }
         };
         const resp = await axios(option);
+        console.log(resp,"getProfile")
         return resp.data.data
     }
     catch (err) {
@@ -295,6 +298,7 @@ export const _logout = (currentUser) => {
                 }
             };
             const resp = await axios(option);
+            console.log(resp,"logout")
             if (resp.data.success === false) {
                 dispatch(_error(resp.data.message));
             }

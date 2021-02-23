@@ -19,8 +19,8 @@ import {
 
 const LoginScreen = ({ imgPath, dialCode,isLoader,isError, _login }) => {
     const [dialCodeState, setdialCodeState] = useState('1');
-    const [password, setPass] = useState('1234');
-    const [phoneNumber, setPhoneNumber] = useState("6112");
+    const [password, setPass] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState("");
     useEffect(() => {
         dialCode && setdialCodeState(dialCode)
     }, [])

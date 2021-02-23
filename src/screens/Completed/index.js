@@ -107,7 +107,7 @@ const Completed = ({ _tasklist, currentUser, tasklist }) => {
               <FlatList
                 data={DATA}
                 renderItem={({ item, index, separators }) => (
-                  <C ard
+                  <Card
                     data={item}
                     buttons={true} />
                 )}

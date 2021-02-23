@@ -72,7 +72,7 @@ const Task = ({ _tasklist, currentUser, tasklist }) => {
         <ShipmentIdQrCode />
         <ScrollView style={{ backgroundColor: Colors.bgColor, }} >
           <FlatList
-            data={DATA.tasks}
+            data={tasklist}
             renderItem={({ item, index, separators }) => (
               <Card
                 data={item}
